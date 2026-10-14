@@ -1,0 +1,24 @@
+# Database credentials
+.env
+.env.*
+!.env.example
+
+# User uploads
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+
+# Editor files
+.vscode/
+.idea/
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# System files
+.DS_Stor.env
+
