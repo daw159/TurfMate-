@@ -137,7 +137,28 @@ $turfs = $listStmt->fetchAll(PDO::FETCH_ASSOC);
 $showForm = isset($_GET['new']) || isset($_GET['edit']) || ($_SERVER['REQUEST_METHOD'] === 'POST' && ($action ?? '') === 'save');
 tm_page_header('Turfs & Pricing', 'turfs', $owner);
 ?>
-<div class="intro-row"><div><h2>Your sports turfs</h2><p>Assign turfs to facilities and set their base hourly prices.</p></div><?php if ($facilities): ?><a class="btn btn-primary" href="turfs.php?new=1">+ Add Turf</a><?php endif; ?></div>
+<div class="intro-row">
+
+    <div>
+        <h2>Your sports turfs</h2>
+        <p>Assign turfs to facilities and set their base hourly prices.</p>
+    </div>
+
+    <div class="form-actions">
+
+        <?php if ($facilities): ?>
+            <a class="btn btn-primary" href="turfs.php?new=1">
+                + Add Turf
+            </a>
+        <?php endif; ?>
+
+        <a class="btn btn-secondary" href="pricing_rules.php">
+            Manage Pricing Rules
+        </a>
+
+    </div>
+
+</div>
 <?php if ($errors): ?><div class="alert alert-error" role="alert"><strong>Please fix:</strong><ul><?php foreach ($errors as $error): ?><li><?= tm_e($error) ?></li><?php endforeach; ?></ul></div><?php endif; ?>
 <?php if (!$facilities): ?><section class="panel"><div class="empty-state"><div class="empty-symbol">▤</div><strong>Add a facility first</strong><p>Every turf must belong to one of your facilities.</p><a class="btn btn-primary" href="facilities.php?new=1">+ Add Facility</a></div></section><?php endif; ?>
 <?php if ($showForm && $facilities): ?>

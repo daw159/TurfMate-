@@ -56,7 +56,7 @@ $arenas = [
 
     <title>TurfMate | Find Your Turf. Book Your Game.</title>
 
-    <link rel="stylesheet" href="/turfmate-team/assets/css/style.css">
+    <link rel="stylesheet" href="/turfmate/assets/css/style.css">
 </head>
 
 <body>
