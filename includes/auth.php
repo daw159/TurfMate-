@@ -13,7 +13,7 @@ function requireRole(array $allowedRoles): void
     // Check whether user is logged in
     if (!isset($_SESSION['user_id'], $_SESSION['role'])) {
 
-        header('Location: /turfmate/auth/login.php');
+        header('Location: turfmate-team/auth/login.php');
         exit;
     }
 
@@ -28,7 +28,7 @@ function requireRole(array $allowedRoles): void
         $_SESSION = [];
         session_destroy();
 
-        header('Location: /turfmate/auth/login.php');
+        header('Location: turfmate-team/auth/login.php');
         exit;
     }
 
@@ -49,7 +49,7 @@ function requireRole(array $allowedRoles): void
             $_SESSION = [];
             session_destroy();
 
-            header('Location: /turfmate/auth/login.php');
+            header('Location: turfmate-team/auth/login.php');
             exit;
         }
 
