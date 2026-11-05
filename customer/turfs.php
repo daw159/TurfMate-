@@ -1,43 +1,14 @@
 <?php
-require_once __DIR__ . '/../includes/auth.php';
-requireRole(['customer']);
-require_once __DIR__ . '/../includes/db.php';
-function esc($v): string { return htmlspecialchars((string)($v ?? ''), ENT_QUOTES, 'UTF-8'); }
-function chooseColumn(array $cols, array $candidates): ?string { foreach ($candidates as $c) if (in_array($c, $cols, true)) return $c; return null; }
-$items = []; $error = null; $filter = trim((string)($_GET['sport'] ?? ''));
-try {
-    $pdo = getDBConnection();
-    $cols = $pdo->query('SHOW COLUMNS FROM turfs')->fetchAll(PDO::FETCH_COLUMN);
-    $nameCol = chooseColumn($cols, ['name', 'turf_name', 'title']);
-    $sportCol = chooseColumn($cols, ['sport_type', 'sport', 'type']);
-    $priceCol = chooseColumn($cols, ['base_price', 'hourly_price', 'price_per_hour', 'price']);
-    $statusCol = chooseColumn($cols, ['status', 'is_active', 'active']);
-    $facilityCol = chooseColumn($cols, ['facility_id']);
-    $idCol = chooseColumn($cols, ['id', 'turf_id']);
-    $conditions = [];
-    if (in_array('deleted_at', $cols, true)) $conditions[] = 't.deleted_at IS NULL';
-    if ($statusCol === 'is_active' || $statusCol === 'active') $conditions[] = "t.`$statusCol` = 1";
-    if ($statusCol === 'status') $conditions[] = "LOWER(t.status) IN ('active', 'available', 'enabled', '1')";
-    $fields = ['t.*']; $join = '';
-    if ($facilityCol) {
-        $fcols = $pdo->query('SHOW COLUMNS FROM facilities')->fetchAll(PDO::FETCH_COLUMN);
-        $fid = chooseColumn($fcols, ['id','facility_id']);
-        $fn = chooseColumn($fcols, ['name','facility_name']);
-        if ($fid && $fn) {
-            $fields[] = "f.`$fn` AS display_facility";
-            $join = " LEFT JOIN facilities f ON f.`$fid` = t.`$facilityCol`";
-            if (in_array('deleted_at', $fcols, true)) $conditions[] = 'f.deleted_at IS NULL';
-            $fs = chooseColumn($fcols, ['is_active','active','status']);
-            if ($fs === 'is_active' || $fs === 'active') $conditions[] = "f.`$fs` = 1";
-            if ($fs === 'status') $conditions[] = "LOWER(f.status) IN ('active', 'available', 'enabled', '1')";
-        }
-    }
-    if ($sportCol && $filter !== '') $conditions[] = "t.`$sportCol` LIKE :sport";
-    $sql = 'SELECT '.implode(', ', $fields).' FROM turfs t'.$join.($conditions ? ' WHERE '.implode(' AND ', $conditions) : '').' ORDER BY '.($idCol ? "t.`$idCol` DESC" : '1').' LIMIT 100';
-    $stmt = $pdo->prepare($sql);
-    if ($sportCol && $filter !== '') $stmt->bindValue(':sport', '%'.$filter.'%');
-    $stmt->execute(); $rows = $stmt->fetchAll();
-    foreach ($rows as $r) $items[] = ['name'=>$nameCol ? ($r[$nameCol] ?? 'Turf') : 'Turf', 'sport'=>$sportCol ? ($r[$sportCol] ?? 'Sports') : 'Sports', 'price'=>$priceCol ? ($r[$priceCol] ?? null) : null, 'facility'=>$r['display_facility'] ?? '', 'id'=>$idCol ? ($r[$idCol] ?? '') : ''];
-} catch (Throwable $e) { error_log('TurfMate browse error: '.$e->getMessage()); $error = 'Could not load turfs. Check your database connection and schema with your teammate.'; }
+require_once __DIR__.'/browse_helpers.php';
+$error=null;$items=[];
+try {$items=tm_load();} catch(Throwable $e) {error_log('TurfMate browse: '.$e->getMessage());$error='Unable to load turfs. Check database connection and schema.';}
+$sport=trim((string)($_GET['sport']??''));$search=trim((string)($_GET['q']??''));
+$sports=array_values(array_unique(array_map(fn($t)=>$t['sport'],$items)));sort($sports);
+$filtered=array_values(array_filter($items,fn($t)=>(!$sport||strcasecmp($t['sport'],$sport)===0)&&(!$search||stripos($t['name'].' '.$t['location'].' '.$t['facility_name'].' '.$t['sport'],$search)!==false)));
+tm_header('Explore Turfs');
 ?>
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Browse Turfs | TurfMate</title><link rel="stylesheet" href="../assets/css/customer.css"></head><body><header class="top"><a class="brand" href="dashboard.php">⬡ TurfMate</a><nav><a href="dashboard.php">Home</a><a href="turfs.php">Turfs</a><a href="../auth/logout.php">Logout</a></nav></header><main class="container"><h1>Available Turfs</h1><p class="muted">Explore active sports grounds from your TurfMate database.</p><form class="filter" method="get"><label for="sport">Sport</label><select id="sport" name="sport"><option value="">All sports</option><?php foreach (['Football','Cricket','Padel','Tennis'] as $s): ?><option value="<?= esc($s) ?>" <?= strcasecmp($filter,$s)===0?'selected':'' ?>><?= esc($s) ?></option><?php endforeach ?></select><button class="button" type="submit">Apply Filter</button><a href="turfs.php">Reset</a></form><?php if ($error): ?><p class="notice"><?= esc($error) ?></p><?php elseif (!$items): ?><p class="notice">No active turfs found for this filter.</p><?php else: ?><div class="cards turf-grid"><?php foreach ($items as $item): ?><article class="tile turf-card"><div class="turf-photo"></div><div class="turf-body"><span class="pill"><?= esc($item['sport']) ?></span><h3><?= esc($item['name']) ?></h3><p class="muted"><?= esc($item['facility']) ?></p><p><strong><?= $item['price'] !== null ? 'Rs. '.esc(number_format((float)$item['price'], 0)).' / hour (base rate)' : 'Price calculated during booking' ?></strong></p><span class="muted">Booking and live pricing coming next</span></div></article><?php endforeach ?></div><?php endif ?></main></body></html>
+<section class="tm-banner"><div class="tm-wrap"><p class="tm-kicker">FIND YOUR GAME</p><h1>Explore Sports Turfs</h1><p>Discover great venues for cricket, football, padel and more.</p></div></section>
+<main class="tm-wrap tm-main"><form class="tm-filters" method="get" action="turfs.php"><label>Search venues<input type="search" name="q" value="<?=tm_h($search)?>" placeholder="Search turf, facility or location"></label><label>Sport<select name="sport"><option value="">All sports</option><?php foreach($sports as $s): ?><option value="<?=tm_h($s)?>" <?=$sport===$s?'selected':''?>><?=tm_h(ucfirst($s))?></option><?php endforeach; ?></select></label><button class="tm-btn" type="submit">Find Turfs</button><a class="tm-reset" href="turfs.php">Clear</a></form>
+<div class="tm-section-heading"><div><h2>Available Turfs</h2><p><?=count($filtered)?> venue(s) found</p></div></div>
+<?php if($error): ?><div class="tm-notice"><?=tm_h($error)?></div><?php elseif(!$filtered): ?><div class="tm-empty"><h3>No turfs found</h3><p>Try another sport or search term. Only active, non-deleted turfs are displayed.</p></div><?php else: ?><div class="tm-grid"><?php foreach($filtered as $t): ?><article class="tm-card"><div class="tm-photo"><span class="tm-sport"><?=tm_h(ucfirst($t['sport']))?></span></div><div class="tm-card-body"><p class="tm-facility"><?=tm_h($t['facility_name'])?></p><h3><?=tm_h($t['name'])?></h3><p class="tm-location">📍 <?=tm_h($t['location'])?></p><div class="tm-card-foot"><div><?php if($t['price']!=='' && is_numeric($t['price'])): ?><strong>Rs <?=number_format((float)$t['price'],0)?></strong><small> / hour · base rate</small><?php else: ?><small>Pricing shown on booking</small><?php endif; ?></div><a class="tm-btn" href="turf-details.php?id=<?=urlencode((string)$t['id'])?>">View Details</a></div></div></article><?php endforeach; ?></div><?php endif; ?>
+</main><?php tm_footer(); ?>
