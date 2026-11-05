@@ -14,8 +14,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     tm_verify_csrf();
     $action = (string) ($_POST['action'] ?? '');
     $id = filter_var($_POST['id'] ?? 0, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: 0;
+    // SOFT DELETE AND RESTORE TURF
+if (in_array($action, ['remove', 'restore'], true) && $id > 0) {
+
+    $stmt = $pdo->prepare(
+        "UPDATE turfs t
+         INNER JOIN facilities f ON f.id = t.facility_id
+         SET t.deleted_at = ?
+         WHERE t.id = ?
+         AND f.owner_id = ?
+         AND f.deleted_at IS NULL
+         AND " . ($action === 'remove'
+             ? "t.deleted_at IS NULL"
+             : "t.deleted_at IS NOT NULL")
+    );
+
+    $deletedAt = $action === 'remove'
+        ? date('Y-m-d H:i:s')
+        : null;
+
+    $stmt->execute([$deletedAt, $id, $ownerId]);
+
+    tm_flash(
+        $stmt->rowCount() ? 'success' : 'error',
+        $stmt->rowCount()
+            ? ($action === 'remove'
+                ? 'Turf removed successfully.'
+                : 'Turf restored successfully.')
+            : 'Turf not found or already in the requested state.'
+    );
+
+    tm_redirect('turfs.php');
+}
     if ($action === 'toggle' && $id > 0) {
-        $stmt = $pdo->prepare("UPDATE turfs t INNER JOIN facilities f ON f.id = t.facility_id SET t.status = IF(t.status = 'active', 'inactive', 'active') WHERE t.id = ? AND f.owner_id = ?");
+        $stmt = $pdo->prepare(
+    "UPDATE turfs t
+     INNER JOIN facilities f ON f.id = t.facility_id
+     SET t.status = IF(t.status = 'active', 'inactive', 'active')
+     WHERE t.id = ?
+     AND f.owner_id = ?
+     AND f.deleted_at IS NULL
+     AND t.deleted_at IS NULL"
+);
         $stmt->execute([$id, $ownerId]);
         tm_flash($stmt->rowCount() ? 'success' : 'error', $stmt->rowCount() ? 'Turf status updated.' : 'Turf not found or not yours.');
         tm_redirect('turfs.php');
@@ -73,7 +113,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form = $existing;
 }
 
-$listStmt = $pdo->prepare('SELECT t.*, f.name AS facility_name FROM turfs t INNER JOIN facilities f ON f.id=t.facility_id WHERE f.owner_id=? ORDER BY t.id DESC');
+// Turf listing filters
+$view = ($_GET['view'] ?? '') === 'removed'
+    ? 'removed'
+    : 'active';
+
+$condition = $view === 'removed'
+    ? 't.deleted_at IS NOT NULL'
+    : 't.deleted_at IS NULL';
+
+$listStmt = $pdo->prepare(
+    "SELECT t.*, f.name AS facility_name
+     FROM turfs t
+     INNER JOIN facilities f ON f.id = t.facility_id
+     WHERE f.owner_id = ?
+     AND f.deleted_at IS NULL
+     AND $condition
+     ORDER BY t.id DESC"
+);
+
 $listStmt->execute([$ownerId]);
 $turfs = $listStmt->fetchAll(PDO::FETCH_ASSOC);
 $showForm = isset($_GET['new']) || isset($_GET['edit']) || ($_SERVER['REQUEST_METHOD'] === 'POST' && ($action ?? '') === 'save');
@@ -95,9 +153,138 @@ tm_page_header('Turfs & Pricing', 'turfs', $owner);
     <div class="full form-actions"><button class="btn btn-primary" type="submit">Save Turf</button><a class="btn btn-secondary" href="turfs.php">Cancel</a></div>
 </form></section>
 <?php endif; ?>
+<!-- Turf Filters -->
+<div class="form-actions" style="margin-bottom: 20px;">
+
+    <a href="turfs.php"
+       class="btn <?= $view === 'active' ? 'btn-primary' : 'btn-secondary' ?>">
+        All Turfs
+    </a>
+
+    <a href="turfs.php?view=removed"
+       class="btn <?= $view === 'removed' ? 'btn-primary' : 'btn-secondary' ?>">
+        Removed Turfs
+    </a>
+
+</div>
 <section class="panel"><div class="panel-heading"><div><h2>All turfs <span class="count-tag"><?= count($turfs) ?></span></h2><p>Base prices can be updated at any time.</p></div></div>
 <?php if (!$turfs): ?><div class="empty-state"><div class="empty-symbol">◫</div><strong>No turfs yet</strong><p>Add a turf after creating your first facility.</p></div>
 <?php else: ?><div class="table-wrap"><table><thead><tr><th>Turf</th><th>Facility</th><th>Sport</th><th>Price / Hour</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-<?php foreach ($turfs as $turf): ?><tr><td><strong><?= tm_e($turf['name']) ?></strong><span class="subline"><?= $turf['capacity'] !== null ? (int) $turf['capacity'] . ' players' : 'Capacity not set' ?></span></td><td><?= tm_e($turf['facility_name']) ?></td><td><?= tm_e(ucfirst($turf['sport_type'])) ?></td><td><?= tm_money($turf['hourly_price']) ?></td><td><span class="pill status-<?= tm_e($turf['status']) ?>"><?= tm_e(ucfirst($turf['status'])) ?></span></td><td><div class="table-actions"><a class="btn btn-small btn-secondary" href="turfs.php?edit=<?= (int) $turf['id'] ?>">Edit</a><form method="post" action="turfs.php"><input type="hidden" name="csrf" value="<?= tm_e(tm_csrf()) ?>"><input type="hidden" name="action" value="toggle"><input type="hidden" name="id" value="<?= (int) $turf['id'] ?>"><button class="btn btn-small btn-outline" type="submit"><?= $turf['status'] === 'active' ? 'Deactivate' : 'Activate' ?></button></form></div></td></tr><?php endforeach; ?>
+<?php foreach ($turfs as $turf): ?>
+<tr>
+
+    <!-- Turf Name -->
+    <td>
+        <strong><?= tm_e($turf['name']) ?></strong>
+
+        <span class="subline">
+            <?= $turf['capacity'] !== null
+                ? (int) $turf['capacity'] . ' players'
+                : 'Capacity not set' ?>
+        </span>
+    </td>
+
+    <!-- Facility -->
+    <td><?= tm_e($turf['facility_name']) ?></td>
+
+    <!-- Sport -->
+    <td><?= tm_e(ucfirst($turf['sport_type'])) ?></td>
+
+    <!-- Price -->
+    <td><?= tm_money($turf['hourly_price']) ?></td>
+
+    <!-- Status -->
+    <td>
+        <?php if ($view === 'removed'): ?>
+
+            <span class="pill status-inactive">Removed</span>
+
+        <?php else: ?>
+
+            <span class="pill status-<?= tm_e($turf['status']) ?>">
+                <?= tm_e(ucfirst($turf['status'])) ?>
+            </span>
+
+        <?php endif; ?>
+    </td>
+
+    <!-- Actions -->
+    <td>
+        <div class="table-actions">
+
+            <?php if ($view === 'removed'): ?>
+
+                <!-- Restore -->
+                <form method="post" action="turfs.php"
+                      onsubmit="return confirm('Restore this turf?');">
+
+                    <input type="hidden" name="csrf"
+                           value="<?= tm_e(tm_csrf()) ?>">
+
+                    <input type="hidden" name="action" value="restore">
+
+                    <input type="hidden" name="id"
+                           value="<?= (int) $turf['id'] ?>">
+
+                    <button type="submit" class="btn btn-small btn-primary">
+                        Restore
+                    </button>
+
+                </form>
+
+            <?php else: ?>
+
+                <!-- Edit -->
+                <a class="btn btn-small btn-secondary"
+                   href="turfs.php?edit=<?= (int) $turf['id'] ?>">
+                    Edit
+                </a>
+
+                <!-- Activate / Deactivate -->
+                <form method="post" action="turfs.php">
+
+                    <input type="hidden" name="csrf"
+                           value="<?= tm_e(tm_csrf()) ?>">
+
+                    <input type="hidden" name="action" value="toggle">
+
+                    <input type="hidden" name="id"
+                           value="<?= (int) $turf['id'] ?>">
+
+                    <button type="submit" class="btn btn-small btn-outline">
+                        <?= $turf['status'] === 'active'
+                            ? 'Deactivate'
+                            : 'Activate' ?>
+                    </button>
+
+                </form>
+
+                <!-- Remove -->
+                <form method="post" action="turfs.php"
+                      onsubmit="return confirm('Remove this turf? You can restore it later.');">
+
+                    <input type="hidden" name="csrf"
+                           value="<?= tm_e(tm_csrf()) ?>">
+
+                    <input type="hidden" name="action" value="remove">
+
+                    <input type="hidden" name="id"
+                           value="<?= (int) $turf['id'] ?>">
+
+                    <button type="submit"
+                            class="btn btn-small btn-outline"
+                            style="color: #b42318; border-color: #f5c2c0;">
+                        Remove
+                    </button>
+
+                </form>
+
+            <?php endif; ?>
+
+        </div>
+    </td>
+
+</tr>
+<?php endforeach; ?>
 </tbody></table></div><?php endif; ?></section>
 <?php tm_page_footer(); ?>
