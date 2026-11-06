@@ -29,12 +29,19 @@ function tm_load(): array {
             if($key!=='') $facilities[(string)$key]=$f;
         }
     }
+    $activeOwnerIds = array_map(
+        'intval',
+        $db->query("SELECT id FROM users WHERE role = 'owner' AND status = 'active'")
+            ->fetchAll(PDO::FETCH_COLUMN)
+    );
+    $activeOwnerLookup = array_fill_keys($activeOwnerIds, true);
     $out=[];
     foreach($turfs as $t) {
         if(!tm_is_active($t)) continue;
         $f=$facilities[(string)tm_pick($t,['facility_id'])] ?? [];
         if (!$f || !tm_is_active($f)) continue;
         if (($f['approval_status'] ?? '') !== 'approved') continue;
+        if (!isset($activeOwnerLookup[(int) ($f['owner_id'] ?? 0)])) continue;
         $out[]=['raw'=>$t,'facility'=>$f,'id'=>tm_pick($t,['id','turf_id']),
           'name'=>tm_pick($t,['name','turf_name','title'],'Sports Turf'),
           'sport'=>tm_pick($t,['sport_type','sport','type','category'],'Sports'),
