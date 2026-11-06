@@ -1,0 +1,316 @@
+/* TurfMate: Owner Maintenance Management */
+.mt-page {
+    --mt-green:#216e48;
+    --mt-border:#dfe9e2;
+    --mt-muted:#718079;
+    display:grid;
+    gap:20px;
+}
+.mt-heading {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+}
+.mt-heading h2 {
+    margin:0 0 5px;
+    color:#1e2d3d;
+    font-size:23px;
+}
+.mt-heading p, .mt-section-head p {
+    margin:0;
+    color:var(--mt-muted);
+    font-size:13px;
+}
+.mt-btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 15px;
+    border-radius:9px;
+    border:1px solid var(--mt-border);
+    font-size:13px;
+    font-weight:700;
+    text-decoration:none;
+    cursor:pointer;
+    white-space:nowrap;
+}
+.mt-primary {
+    background:var(--mt-green);
+    color:white;
+    border-color:var(--mt-green);
+}
+.mt-primary:hover {
+    background:#165637;
+    color:white;
+}
+.mt-secondary {
+    background:#f4f8f5;
+    color:#23563a;
+}
+.mt-secondary:hover {
+    background:#e9f1eb;
+}
+.mt-tabs {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0;
+}
+.mt-tabs a, .mt-tabs span {
+    display:inline-flex;
+    align-items:center;
+    padding:10px 14px;
+    text-decoration:none;
+    border:1px solid var(--mt-border);
+    border-radius:9px;
+    background:white;
+    font-size:13px;
+    color:#445548;
+    font-weight:650;
+}
+.mt-tabs a:hover {
+    background:#ecf6ee;
+    color:#216e48;
+}
+.mt-tabs a.active {
+    background:#e1f3e7;
+    border-color:#b6dac2;
+    color:#17633c;
+}
+.mt-tabs .mt-disabled {
+    color:#98a4a0;
+    background:#f8faf9;
+}
+.mt-stats {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:15px;
+}
+.mt-stats article {
+    border:1px solid var(--mt-border);
+    border-radius:14px;
+    background:linear-gradient(145deg,#fff,#f9fcfa);
+    padding:21px;
+    box-shadow:0 5px 20px rgba(20,65,44,.04);
+}
+.mt-stats small {
+    display:block;
+    color:#677c70;
+    font-weight:650;
+    font-size:12px;
+    margin-bottom:9px;
+}
+.mt-stats strong {
+    font-size:26px;
+    color:#1d3d2b;
+    letter-spacing:-.5px;
+}
+.mt-card {
+    background:white;
+    border:1px solid var(--mt-border);
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(22,45,35,.04);
+}
+.mt-section-head {
+    padding:20px 22px;
+    border-bottom:1px solid var(--mt-border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.mt-section-head h3 {
+    margin:0 0 5px;
+    font-size:17px;
+    color:#233040;
+}
+.mt-section-head a {
+    color:#216e48;
+    font-weight:700;
+    text-decoration:none;
+}
+.mt-form {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    padding:22px;
+}
+.mt-form label, .mt-filters label {
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    color:#2a4737;
+    font-size:13px;
+    font-weight:700;
+}
+.mt-form input, .mt-form select, .mt-form textarea, .mt-filters input, .mt-filters select {
+    box-sizing:border-box;
+    width:100%;
+    min-width:0;
+    font:inherit;
+    padding:11px 12px;
+    border:1px solid #d3dfd7;
+    border-radius:9px;
+    color:#24362b;
+    background:white;
+}
+.mt-form input:focus, .mt-form select:focus, .mt-form textarea:focus, .mt-filters input:focus, .mt-filters select:focus {
+    outline:2px solid #b1d9c0;
+    border-color:#216e48;
+}
+.mt-form textarea {
+    resize:vertical;
+}
+.mt-wide {
+    grid-column:1/-1;
+}
+.mt-actions {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.mt-hint {
+    padding:0 22px 17px;
+    color:#75847a;
+    font-size:12px;
+    line-height:1.5;
+    margin:0;
+}
+.mt-filters {
+    padding:20px 22px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1.3fr auto;
+    gap:14px;
+    align-items:end;
+    border-bottom:1px solid var(--mt-border);
+}
+.mt-filter-actions {
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+.mt-table-wrap {
+    width:100%;
+    overflow-x:auto;
+}
+.mt-table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+.mt-table th {
+    background:#f8faf9;
+    color:#6b7c78;
+    font-size:11px;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    text-align:left;
+    padding:14px 16px;
+    white-space:nowrap;
+}
+.mt-table td {
+    border-top:1px solid #edf1ee;
+    padding:14px 16px;
+    vertical-align:middle;
+    color:#304138;
+}
+.mt-table td small {
+    display:block;
+    margin-top:5px;
+    color:#8b9890;
+}
+.mt-table td strong {
+    color:#243a2d;
+}
+.mt-table .mt-cost {
+    color:#1a6940;
+    font-weight:800;
+    white-space:nowrap;
+}
+.mt-status {
+    display:inline-flex;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+    white-space:nowrap;
+}
+.mt-planned {
+    background:#eef2ff;
+    color:#4d5ea2;
+}
+.mt-in_progress {
+    background:#fff1d7;
+    color:#a65c0b;
+}
+.mt-completed {
+    background:#e5f6e9;
+    color:#176b40;
+}
+.mt-row-actions {
+    white-space:nowrap;
+}
+.mt-row-actions a {
+    color:#176c42;
+    font-weight:700;
+    text-decoration:none;
+    margin-right:10px;
+}
+.mt-row-actions form {
+    display:inline;
+}
+.mt-row-actions button {
+    border:0;
+    background:#fff0f0;
+    color:#ad2929;
+    padding:7px 9px;
+    border-radius:7px;
+    font-weight:700;
+    cursor:pointer;
+}
+.mt-empty {
+    text-align:center;
+    padding:30px!important;
+    color:#829088!important;
+}
+.mt-error, .mt-notice {
+    padding:14px 18px;
+    border-radius:10px;
+    border:1px solid #f4d2d0;
+    background:#fff4f3;
+    color:#9e332b;
+    font-size:13px;
+}
+.mt-notice {
+    background:#fff9eb;
+    border-color:#f2e0aa;
+    color:#735816;
+}
+.mt-notice a {
+    color:#1a6c40;
+}
+@media(max-width:1050px) {
+    .mt-stats {
+        grid-template-columns:repeat(2,1fr);
+    }
+    .mt-filters {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:650px) {
+    .mt-stats, .mt-form, .mt-filters {
+        grid-template-columns:1fr;
+    }
+    .mt-heading h2 {
+        font-size:20px;
+    }
+    .mt-wide {
+        grid-column:auto;
+    }
+    .mt-form, .mt-filters {
+        padding:16px;
+    }
+}
