@@ -4,7 +4,8 @@ requireRole(['customer']);
 require_once __DIR__ . '/../config/database.php';
 function pe($v): string { return htmlspecialchars((string)($v ?? ''), ENT_QUOTES, 'UTF-8'); }
 $db=getDBConnection();
-$userId=(int)$_SESSION['user_id'];
+$userId=(int)($_SESSION['user_id'] ?? $_SESSION['id'] ?? 0);
+if ($userId <= 0) { http_response_code(401); exit('Please log in again.'); }
 $columns=array_column($db->query('SHOW COLUMNS FROM users')->fetchAll(PDO::FETCH_ASSOC),'Field');
 $pick=function(array $candidates) use ($columns): ?string {foreach($candidates as $c){if(in_array($c,$columns,true))return $c;}return null;};
 $nameCol=$pick(['name','full_name','username']);
@@ -32,7 +33,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 $displayName=$nameCol?($user[$nameCol]??'Customer'):($_SESSION['name']??'Customer');
 $initial=strtoupper(substr(trim((string)$displayName),0,1));
 ?>
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My Profile | TurfMate</title><link rel="stylesheet" href="../assets/css/booking.css"><link rel="stylesheet" href="../assets/css/profile.css"></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My Profile | TurfMate</title><link rel="stylesheet" href="/turfmate/assets/css/profile.css?v=3"></head><body>
 <header class="nav"><a class="logo" href="dashboard.php">⬡ TurfMate</a><nav><a href="dashboard.php">Home</a><a href="turfs.php">Explore Turfs</a><a href="my-bookings.php">My Bookings</a><a class="active" href="profile.php">My Profile</a><a href="../auth/logout.php">Logout</a></nav></header>
 <main class="profile-wrap"><div class="profile-title"><div><span class="profile-eyebrow">YOUR ACCOUNT</span><h1>My Profile</h1><p>Manage your TurfMate account information.</p></div><a class="profile-back" href="my-bookings.php">View My Bookings →</a></div>
 <div class="profile-grid"><aside class="profile-card profile-aside"><div class="profile-avatar"><?=pe($initial)?></div><h2><?=pe($displayName)?></h2><p><?=pe($emailCol?($user[$emailCol]??''):'Customer account')?></p><span class="profile-role">Customer account</span><div class="profile-side-links"><a class="selected" href="profile.php">◉ Personal details</a><a href="my-bookings.php">▦ Booking history</a><a href="turfs.php">⌕ Explore turfs</a></div></aside>
