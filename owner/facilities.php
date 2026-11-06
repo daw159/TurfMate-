@@ -127,6 +127,9 @@ $facilities = $listQuery->fetchAll(PDO::FETCH_ASSOC);
 $showForm = isset($_GET['new']) || isset($_GET['edit']) || ($_SERVER['REQUEST_METHOD'] === 'POST' && ($action ?? '') === 'save');
 tm_page_header('Facilities', 'facilities', $owner);
 ?>
+<div class="alert" style="margin: 12px 0;">New facilities require Super Admin approval before customers can book them. Existing facilities are also pending until reviewed.</div>
+<?php
+?>
 <div class="intro-row"><div><h2>Manage your facilities</h2><p>Add locations, update contact details, and control availability.</p></div><a class="btn btn-primary" href="facilities.php?new=1">+ Add Facility</a></div>
 <?php if ($errors): ?><div class="alert alert-error" role="alert"><strong>Please fix:</strong><ul><?php foreach ($errors as $error): ?><li><?= tm_e($error) ?></li><?php endforeach; ?></ul></div><?php endif; ?>
 <?php if ($showForm): ?>
@@ -158,7 +161,7 @@ tm_page_header('Facilities', 'facilities', $owner);
 </div>
 <section class="panel"><div class="panel-heading"><div><h2>All facilities <span class="count-tag"><?= count($facilities) ?></span></h2><p>Only facilities owned by your account appear here.</p></div></div>
 <?php if (!$facilities): ?><div class="empty-state"><div class="empty-symbol">▤</div><strong>No facilities yet</strong><p>Create your first facility to start adding turfs.</p><a class="btn btn-primary" href="facilities.php?new=1">+ Add Facility</a></div>
-<?php else: ?><div class="table-wrap"><table><thead><tr><th>Facility</th><th>Location</th><th>Turfs</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+<?php else: ?><div class="table-wrap"><table><thead><tr><th>Facility</th><th>Location</th><th>Turfs</th><th>Status</th><th>Approval</th><th>Actions</th></tr></thead><tbody>
 <?php foreach ($facilities as $facility): ?>
 <tr>
 
@@ -191,6 +194,14 @@ tm_page_header('Facilities', 'facilities', $owner);
             <span class="pill status-<?= tm_e($facility['status']) ?>">
                 <?= tm_e(ucfirst($facility['status'])) ?>
             </span>
+        <?php endif; ?>
+    </td>
+
+    <!-- Super Admin approval status (read-only for owners) -->
+    <td>
+        <strong><?= tm_e(ucfirst((string) $facility['approval_status'])) ?></strong>
+        <?php if ($facility['approval_status'] === 'rejected' && !empty($facility['rejection_reason'])): ?>
+            <span class="subline">Reason: <?= tm_e($facility['rejection_reason']) ?></span>
         <?php endif; ?>
     </td>
 
