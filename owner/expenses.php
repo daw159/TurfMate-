@@ -288,7 +288,25 @@ tm_page_header('Expense Management', 'expenses', $owner);
             <h2>Track business expenses</h2>
             <p>Manage costs by facility and keep a clear spending history.</p>
         </div>
-        <a class="btn btn-primary" href="expenses.php?new=1">+ Add Expense</a>
+
+        <a class="btn btn-primary" href="expenses.php?new=1">
+            + Add Expense
+        </a>
+    </div>
+
+    <!-- Expenses & Inventory Navigation -->
+    <div class="module-tabs">
+        <a href="expenses.php" class="module-tab active">
+            Expenses
+        </a>
+
+        <a href="inventory.php" class="module-tab">
+            Inventory
+        </a>
+
+        <span class="module-tab disabled">
+            Stock Transactions (next)
+        </span>
     </div>
 
     <?php if ($errors): ?>

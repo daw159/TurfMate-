@@ -246,3 +246,47 @@
         padding: 18px;
     }
 }
+
+
+/* Expenses & Inventory Navigation */
+
+.ex-page .module-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0 22px;
+}
+
+.ex-page .module-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: 1px solid #d9e4dd;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #425466;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ex-page .module-tab:hover {
+    background: #edf7f0;
+    color: #216e48;
+}
+
+.ex-page .module-tab.active {
+    background: #e1f3e7;
+    color: #216e48;
+    border-color: #b8dfc6;
+}
+
+.ex-page .module-tab.disabled {
+    background: #f8fafc;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
