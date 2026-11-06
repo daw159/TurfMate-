@@ -9,6 +9,7 @@ function tm_page_header(string $pageTitle, string $active, array $owner): void
     $dashboardClass = $active === 'dashboard' ? 'active' : '';
     $facilitiesClass = $active === 'facilities' ? 'active' : '';
     $turfsClass = $active === 'turfs' ? 'active' : '';
+    $bookingsClass = $active === 'bookings' ? 'active' : '';
     ?>
 <!doctype html>
 <html lang="en">
@@ -27,9 +28,9 @@ function tm_page_header(string $pageTitle, string $active, array $owner): void
             <a class="nav-link <?= $dashboardClass ?>" href="dashboard.php">▦ <span>Dashboard</span></a>
             <a class="nav-link <?= $facilitiesClass ?>" href="facilities.php">▤ <span>Facilities</span></a>
             <a class="nav-link <?= $turfsClass ?>" href="turfs.php">◫ <span>Turfs & Pricing</span></a>
+            <a class="nav-link <?= $bookingsClass ?>" href="bookings.php">▣ <span>Bookings</span></a>
         </nav>
         <div class="nav-label">COMING NEXT</div>
-        <div class="nav-disabled">▣ <span>Bookings</span></div>
         <div class="nav-disabled">◉ <span>Payments</span></div>
         <div class="nav-disabled">▥ <span>Staff & Expenses</span></div>
         <div class="sidebar-bottom"><span class="user-dot"></span><div><strong><?= $name ?></strong><small>Owner</small></div></div>
