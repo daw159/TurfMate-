@@ -363,7 +363,7 @@ $recentPayments = $recentPaymentsStmt->fetchAll(PDO::FETCH_ASSOC);
 $tabs = [
     'Overview' => 'reports.php',
     'Financial' => 'reports-financial.php',
-    'Bookings' => null,
+    'Bookings' => 'reports-bookings.php',
     'Inventory & Maintenance' => null,
     'Export' => null,
 ];

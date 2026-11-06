@@ -475,7 +475,9 @@ tm_page_header('Reports & Analytics', 'reports', $owner);
     <nav class="fin-tabs" aria-label="Reports sections">
         <a href="reports.php">Overview</a>
         <a href="reports-financial.php" class="active" aria-current="page">Financial</a>
-        <span class="fin-upcoming">Bookings <small>soon</small></span>
+        <a href="reports-bookings.php">
+    Bookings
+</a>
         <span class="fin-upcoming">Inventory &amp; Maintenance <small>soon</small></span>
         <span class="fin-upcoming">Export <small>soon</small></span>
     </nav>
