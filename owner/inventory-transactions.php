@@ -248,7 +248,7 @@ tm_page_header('Stock Transactions', 'inventory', $owner);
     </div>
 
     <nav class="st-tabs" aria-label="Expenses and inventory modules">
-        <span>Overview (next)</span>
+        <a href="expenses-inventory.php">Overview</a>
         <a href="expenses.php">Expenses</a>
         <a href="inventory.php">Inventory</a>
         <a href="inventory-transactions.php" class="selected" aria-current="page">Stock Transactions</a>

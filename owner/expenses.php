@@ -297,9 +297,9 @@ tm_page_header('Expense Management', 'expenses', $owner);
     <!-- Expenses & Inventory Navigation -->
 <div class="module-tabs">
 
-    <span class="module-tab disabled">
-        Overview (next)
-    </span>
+    <a href="expenses-inventory.php" class="module-tab">
+    Overview
+</a>
 
     <a href="expenses.php" class="module-tab active">
         Expenses

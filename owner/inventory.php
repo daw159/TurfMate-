@@ -292,7 +292,7 @@ tm_page_header('Inventory Management', 'inventory', $owner);
 
  <div class="inv-tabs">
 
-    <span>Overview (next)</span>
+    <a href="expenses-inventory.php">Overview</a>
 
     <a href="expenses.php">
         Expenses

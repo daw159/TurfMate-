@@ -214,7 +214,7 @@ tm_page_header('Maintenance Management', 'maintenance', $owner);
     </div>
 
     <nav class="mt-tabs" aria-label="Expenses and inventory navigation">
-        <span class="mt-disabled">Overview (next)</span>
+        <a href="expenses-inventory.php">Overview</a>
         <a href="expenses.php">Expenses</a>
         <a href="inventory.php">Inventory</a>
         <a href="inventory-transactions.php">Stock Transactions</a>
