@@ -139,7 +139,10 @@ $facilities = $statement->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <main class="approval-page">
         <nav class="approval-nav">
-            <a href="dashboard.php">← Super Admin Dashboard</a>
+            <a href="dashboard.php">Dashboard</a>
+            <a href="facilities.php">Facility Approvals</a>
+            <a href="owners.php">Owner Management</a>
+            <a href="users.php">User Management</a>
             <a href="../auth/logout.php">Logout</a>
         </nav>
 

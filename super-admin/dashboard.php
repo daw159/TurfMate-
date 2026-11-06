@@ -101,7 +101,7 @@ $adminName = (string) ($_SESSION['name'] ?? 'Super Admin');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Super Admin Dashboard | TurfMate</title>
-    <link rel="stylesheet" href="../assets/css/super-admin.css?v=1">
+    <link rel="stylesheet" href="../assets/css/super-admin.css?v=2">
 </head>
 <body>
     <div class="app-layout">
@@ -111,22 +111,18 @@ $adminName = (string) ($_SESSION['name'] ?? 'Super Admin');
                 <span>TurfMate <small>Platform Administration</small></span>
             </a>
 
-            <p class="sidebar-label">OVERVIEW</p>
+            <p class="sidebar-label">PLATFORM MANAGEMENT</p>
             <nav class="sidebar-nav">
-                <a class="nav-link active" href="dashboard.php" aria-current="page">▦ <span>Dashboard</span></a>
+                <a class="nav-link active" href="dashboard.php">▦ <span>Dashboard</span></a>
+                <a class="nav-link " href="facilities.php">▤ <span>Facility Approvals</span></a>
+                <a class="nav-link " href="owners.php">♙ <span>Owner Management</span></a>
+                <a class="nav-link " href="users.php">♧ <span>User Management</span></a>
+                <span class="nav-link disabled" title="Coming in a later update">▥ <span>Platform Reports (soon)</span></span>
             </nav>
-
-            <p class="sidebar-label">COMING IN NEXT STEPS</p>
-            <div class="sidebar-nav">
-                <span class="nav-link disabled">▤ <span>Facility Approvals</span></span>
-                <span class="nav-link disabled">♙ <span>Owner Management</span></span>
-                <span class="nav-link disabled">♧ <span>User Management</span></span>
-                <span class="nav-link disabled">▥ <span>Platform Reports</span></span>
-            </div>
 
             <div class="sidebar-footer">
                 <span class="avatar">SA</span>
-                <div><strong><?= sa_escape($adminName) ?></strong><small>Super Admin</small></div>
+                <div><strong>Super Admin</strong><small>Platform Administration</small></div>
             </div>
         </aside>
 
@@ -216,6 +212,7 @@ $adminName = (string) ($_SESSION['name'] ?? 'Super Admin');
                 <section class="panel">
                     <div class="panel-heading">
                         <div><h3>Recently created facilities</h3><p>Latest facilities across all owners</p></div>
+                        <a class="action-link" href="facilities.php?status=pending">Manage approvals →</a>
                     </div>
                     <div class="table-scroll">
                         <table>
