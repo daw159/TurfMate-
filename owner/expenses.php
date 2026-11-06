@@ -295,19 +295,29 @@ tm_page_header('Expense Management', 'expenses', $owner);
     </div>
 
     <!-- Expenses & Inventory Navigation -->
-    <div class="module-tabs">
-        <a href="expenses.php" class="module-tab active">
-            Expenses
-        </a>
+<div class="module-tabs">
 
-        <a href="inventory.php" class="module-tab">
-            Inventory
-        </a>
+    <span class="module-tab disabled">
+        Overview (next)
+    </span>
 
-        <span class="module-tab disabled">
-            Stock Transactions (next)
-        </span>
-    </div>
+    <a href="expenses.php" class="module-tab active">
+        Expenses
+    </a>
+
+    <a href="inventory.php" class="module-tab">
+        Inventory
+    </a>
+
+    <a href="inventory-transactions.php" class="module-tab">
+        Stock Transactions
+    </a>
+
+    <span class="module-tab disabled">
+        Maintenance (next)
+    </span>
+
+</div>
 
     <?php if ($errors): ?>
         <div class="alert alert-error" role="alert">

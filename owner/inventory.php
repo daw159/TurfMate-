@@ -290,11 +290,25 @@ tm_page_header('Inventory Management', 'inventory', $owner);
         <a class="inv-button inv-primary" href="inventory.php?new=1">+ Add Item</a>
     </div>
 
-    <div class="inv-tabs">
-        <a href="expenses.php">Expenses</a>
-        <a class="selected" href="inventory.php">Inventory</a>
-        <span title="Stock transactions page is coming next">Stock Transactions (next)</span>
-    </div>
+ <div class="inv-tabs">
+
+    <span>Overview (next)</span>
+
+    <a href="expenses.php">
+        Expenses
+    </a>
+
+    <a href="inventory.php" class="selected">
+        Inventory
+    </a>
+
+    <a href="inventory-transactions.php">
+        Stock Transactions
+    </a>
+
+    <span>Maintenance (next)</span>
+
+</div>
 
     <?php if ($errors): ?>
         <div class="inv-error" role="alert">
