@@ -364,7 +364,7 @@ $tabs = [
     'Overview' => 'reports.php',
     'Financial' => 'reports-financial.php',
     'Bookings' => 'reports-bookings.php',
-    'Inventory & Maintenance' => null,
+    'Inventory & Maintenance' => 'reports-inventory.php',
     'Export' => null,
 ];
 

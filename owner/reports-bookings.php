@@ -353,7 +353,9 @@ tm_page_header('Reports & Analytics', 'reports', $owner);
         <a href="reports.php">Overview</a>
         <a href="reports-financial.php">Financial</a>
         <a href="reports-bookings.php" class="active" aria-current="page">Bookings</a>
-        <span class="br-upcoming">Inventory &amp; Maintenance <small>soon</small></span>
+        <a href="reports-inventory.php">
+    Inventory &amp; Maintenance
+</a>
         <span class="br-upcoming">Export <small>soon</small></span>
     </nav>
 
