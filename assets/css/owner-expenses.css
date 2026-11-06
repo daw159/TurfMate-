@@ -1,0 +1,248 @@
+.ex-page {
+    --ex-green: #216e48;
+    --ex-green-ink: #18573a;
+    --ex-border: #e1e9e4;
+    --ex-muted: #68786f;
+    display: grid;
+    gap: 24px;
+}
+
+.ex-page .intro-row {
+    margin-bottom: 0;
+}
+
+.ex-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ex-metric {
+    background: linear-gradient(140deg, #fff, #f8fcf9);
+    padding: 24px 25px;
+    border: 1px solid var(--ex-border);
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(22, 70, 42, 0.045);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.ex-metric span {
+    font-size: 13px;
+    color: var(--ex-muted);
+    font-weight: 700;
+}
+
+.ex-metric strong {
+    font-size: clamp(23px, 2.5vw, 32px);
+    font-weight: 850;
+    color: #1b3c2a;
+    letter-spacing: -0.7px;
+}
+
+.ex-metric small {
+    color: #7d8b82;
+    font-size: 12px;
+}
+
+.ex-form-panel,
+.ex-history {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.ex-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px;
+    padding: 24px;
+}
+
+.ex-form label,
+.ex-filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #30493a;
+}
+
+.ex-form input,
+.ex-form select,
+.ex-form textarea,
+.ex-filters input,
+.ex-filters select {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid #d4e0d8;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 13px;
+    outline: none;
+    color: #203429;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.ex-form input:focus,
+.ex-form select:focus,
+.ex-form textarea:focus,
+.ex-filters input:focus,
+.ex-filters select:focus {
+    border-color: var(--ex-green);
+    box-shadow: 0 0 0 4px #216e4821;
+}
+
+.ex-form textarea {
+    resize: vertical;
+    min-height: 94px;
+}
+
+.ex-full {
+    grid-column: 1 / -1;
+}
+
+.ex-form-buttons,
+.ex-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ex-muted-btn {
+    background: #eef5f0 !important;
+    color: var(--ex-green-ink) !important;
+    border: 1px solid #d4e6da !important;
+}
+
+.ex-muted-btn:hover {
+    background: #e1f0e6 !important;
+}
+
+.ex-filters {
+    padding: 21px 24px;
+    border-bottom: 1px solid var(--ex-border);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.ex-search {
+    grid-column: span 2;
+}
+
+.ex-filter-actions {
+    grid-column: span 2;
+    padding-bottom: 2px;
+}
+
+.ex-history .table-wrap {
+    overflow: auto;
+}
+
+.ex-history .ex-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ex-history .ex-table th {
+    white-space: nowrap;
+}
+
+.ex-amount {
+    font-weight: 800;
+    color: #1c663f;
+    white-space: nowrap;
+}
+
+.ex-actions {
+    white-space: nowrap;
+}
+
+.ex-actions form {
+    display: inline-block;
+    margin: 0;
+}
+
+.ex-edit,
+.ex-delete {
+    display: inline-block;
+    padding: 7px 10px;
+    background: #edf5ef;
+    border: 0;
+    border-radius: 8px;
+    color: #1c6942;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.ex-delete {
+    background: #fff0f0;
+    color: #b42318;
+}
+
+.ex-edit:hover {
+    background: #dbeddf;
+}
+
+.ex-delete:hover {
+    background: #ffe0e0;
+}
+
+.ex-notice {
+    background: #fff8e8;
+    border: 1px solid #f1d793;
+    padding: 15px 20px;
+    border-radius: 12px;
+}
+
+.ex-notice a {
+    color: #16613c;
+    text-decoration: underline;
+}
+
+.ex-form .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1000px) {
+    .ex-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ex-search,
+    .ex-filter-actions {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 700px) {
+    .ex-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .ex-form,
+    .ex-filters {
+        grid-template-columns: 1fr;
+        padding: 17px;
+    }
+
+    .ex-search,
+    .ex-filter-actions {
+        grid-column: 1;
+    }
+
+    .ex-page {
+        gap: 18px;
+    }
+
+    .ex-metric {
+        padding: 18px;
+    }
+}
