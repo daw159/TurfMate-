@@ -11,6 +11,7 @@ function tm_page_header(string $pageTitle, string $active, array $owner): void
     $facilitiesClass = $active === 'facilities' ? 'active' : '';
     $turfsClass = $active === 'turfs' ? 'active' : '';
     $bookingsClass = $active === 'bookings' ? 'active' : '';
+    $reportsClass = $active === 'reports' ? 'active' : '';
 
     // Expenses and Inventory section
     $expensesClass = in_array($active, ['expenses', 'inventory', 'maintenance'], true)
@@ -74,13 +75,14 @@ function tm_page_header(string $pageTitle, string $active, array $owner): void
                 ▥ <span>Expenses & Inventory</span>
             </a>
 
+            <a class="nav-link <?= $reportsClass ?>"
+   href="reports.php">
+    ◉ <span>Reports & Analytics</span>
+</a>
+
         </nav>
 
-        <div class="nav-label">COMING NEXT</div>
 
-        <div class="nav-disabled">
-            ◉ <span>Reports & Analytics</span>
-        </div>
 
         <div class="sidebar-bottom">
             <span class="user-dot"></span>
