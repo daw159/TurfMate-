@@ -117,7 +117,7 @@ $adminName = (string) ($_SESSION['name'] ?? 'Super Admin');
                 <a class="nav-link " href="facilities.php">▤ <span>Facility Approvals</span></a>
                 <a class="nav-link " href="owners.php">♙ <span>Owner Management</span></a>
                 <a class="nav-link " href="users.php">♧ <span>User Management</span></a>
-                <span class="nav-link disabled" title="Coming in a later update">▥ <span>Platform Reports (soon)</span></span>
+                <a class="nav-link" href="reports.php">▥ <span>Platform Reports</span></a>
             </nav>
 
             <div class="sidebar-footer">

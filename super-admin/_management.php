@@ -43,6 +43,7 @@ function adminPageStart(string $title, string $section, string $description): vo
         'facilities' => 'Facility Approvals',
         'owners' => 'Owner Management',
         'users' => 'User Management',
+        'reports' => 'Platform Reports',
     ];
     ?>
 <!doctype html>
@@ -69,7 +70,6 @@ function adminPageStart(string $title, string $section, string $description): vo
                     <?= $section === $path ? '●' : '○' ?> <span><?= adminEscape($label) ?></span>
                 </a>
             <?php endforeach; ?>
-            <span class="nav-link disabled">▥ <span>Platform Reports (soon)</span></span>
         </nav>
         <div class="sidebar-footer">
             <span class="avatar">SA</span>
