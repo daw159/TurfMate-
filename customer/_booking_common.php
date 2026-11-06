@@ -20,7 +20,7 @@ function turfRows(PDO $db): array {
  $where=[];foreach(['deleted_at'] as $c)if(in_array($c,$tc,true))$where[]='t.'.qid($c).' IS NULL';
  $active=pick($tc,['is_active','active']);if($active)$where[]='t.'.qid($active).'=1';
  $status=pick($tc,['status']);if($status)$where[]="LOWER(t.".qid($status).") IN ('active','available')";
- if($join){if(in_array('deleted_at',$fc,true))$where[]='f.deleted_at IS NULL';$fa=pick($fc,['is_active','active']);if($fa)$where[]='f.'.qid($fa).'=1';}
+ if($join){$where[]="f.approval_status = 'approved'";$where[]="f.status = 'active'";if(in_array('deleted_at',$fc,true))$where[]='f.deleted_at IS NULL';$fa=pick($fc,['is_active','active']);if($fa)$where[]='f.'.qid($fa).'=1';}
  $sql='SELECT '.implode(',',$fields).' FROM turfs t'.$join.($where?' WHERE '.implode(' AND ',$where):'').' ORDER BY t.'.qid($tid).' DESC';
  return $db->query($sql)->fetchAll();
 }
