@@ -313,9 +313,9 @@ tm_page_header('Expense Management', 'expenses', $owner);
         Stock Transactions
     </a>
 
-    <span class="module-tab disabled">
-        Maintenance (next)
-    </span>
+    <a href="maintenance.php" class="module-tab">
+        Maintenance
+    </a>
 
 </div>
 

@@ -252,7 +252,10 @@ tm_page_header('Stock Transactions', 'inventory', $owner);
         <a href="expenses.php">Expenses</a>
         <a href="inventory.php">Inventory</a>
         <a href="inventory-transactions.php" class="selected" aria-current="page">Stock Transactions</a>
-        <span>Maintenance (next)</span>
+        
+    <a href="maintenance.php">
+        Maintenance
+    </a>
     </nav>
 
     <?php if ($errors): ?>

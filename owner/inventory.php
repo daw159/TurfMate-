@@ -306,7 +306,9 @@ tm_page_header('Inventory Management', 'inventory', $owner);
         Stock Transactions
     </a>
 
-    <span>Maintenance (next)</span>
+        <a href="maintenance.php">
+        Maintenance
+    </a>
 
 </div>
 
