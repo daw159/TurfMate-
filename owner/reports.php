@@ -362,7 +362,7 @@ $recentPayments = $recentPaymentsStmt->fetchAll(PDO::FETCH_ASSOC);
 // Report links remain functional even before the other report pages exist.
 $tabs = [
     'Overview' => 'reports.php',
-    'Financial' => null,
+    'Financial' => 'reports-financial.php',
     'Bookings' => null,
     'Inventory & Maintenance' => null,
     'Export' => null,
@@ -385,9 +385,13 @@ tm_page_header('Reports & Analytics', 'reports', $owner);
     <nav class="rp-tabs" aria-label="Reports and Analytics modules">
         <?php foreach ($tabs as $label => $link): ?>
             <?php if ($link !== null): ?>
-                <a href="<?= tm_e($link) ?>" class="active" aria-current="page">
-                    <?= tm_e($label) ?>
-                </a>
+                <a href="<?= tm_e($link) ?>"
+   class="<?= $label === 'Overview' ? 'active' : '' ?>"
+   <?= $label === 'Overview' ? 'aria-current="page"' : '' ?>>
+
+    <?= tm_e($label) ?>
+
+</a>
             <?php else: ?>
                 <span class="rp-tab-upcoming" title="Coming in the next development stages">
                     <?= tm_e($label) ?> <small>soon</small>
