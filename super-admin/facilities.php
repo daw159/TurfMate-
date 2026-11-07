@@ -134,26 +134,44 @@ $facilities = $statement->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Facility Approvals | TurfMate</title>
     <link rel="stylesheet" href="../assets/css/super-admin.css?v=1">
-    <link rel="stylesheet" href="../assets/css/facility-approvals.css?v=1">
+    <link rel="stylesheet" href="../assets/css/facility-approvals.css?v=3">
 </head>
 <body>
-    <main class="approval-page">
-        <nav class="approval-nav">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="facilities.php">Facility Approvals</a>
-            <a href="owners.php">Owner Management</a>
-            <a href="users.php">User Management</a>
-            <a href="../auth/logout.php">Logout</a>
-        </nav>
-
-        <header class="approval-header">
-            <div>
-                <p class="eyebrow">PLATFORM MODERATION</p>
-                <h1>Facility approvals</h1>
-                <p>Review venues before they become available to customers.</p>
+    <div class="app-layout">
+        <aside class="sidebar" aria-label="Super Admin navigation">
+            <a class="brand" href="dashboard.php">
+                <span class="brand-icon">T</span>
+                <span>TurfMate <small>Platform Administration</small></span>
+            </a>
+            <p class="sidebar-label">PLATFORM MANAGEMENT</p>
+            <nav class="sidebar-nav">
+                <a class="nav-link" href="dashboard.php">▦ <span>Dashboard</span></a>
+                <a class="nav-link active" aria-current="page" href="facilities.php">▤ <span>Facility Approvals</span></a>
+                <a class="nav-link" href="owners.php">♙ <span>Owner Management</span></a>
+                <a class="nav-link" href="users.php">♧ <span>User Management</span></a>
+                <a class="nav-link" href="reports.php">▥ <span>Platform Reports</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <span class="avatar">SA</span>
+                <div><strong>Super Admin</strong><small>Platform Administration</small></div>
             </div>
-        </header>
-
+        </aside>
+        <div class="main-area">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">TURFMATE / PLATFORM ADMINISTRATION</p>
+                    <h1>Facility Approvals</h1>
+                </div>
+                <a class="logout-link" href="../auth/logout.php">Log out ↗</a>
+            </header>
+            <main class="content">
+                <div class="welcome-row">
+                    <div>
+                        <h2>Facility Approvals</h2>
+                        <p>Review venues before they become available to customers.</p>
+                    </div>
+                </div>
+                <div class="approval-page">
         <?php if ($message !== ''): ?>
             <div class="notice success"><?= approvalEscape($message) ?></div>
         <?php endif; ?>
@@ -234,6 +252,9 @@ $facilities = $statement->fetchAll(PDO::FETCH_ASSOC);
                 </article>
             <?php endforeach; ?>
         </section>
-    </main>
+                </div>
+            </main>
+        </div>
+    </div>
 </body>
 </html>

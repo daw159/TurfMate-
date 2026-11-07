@@ -33,3 +33,12 @@ body { margin: 0; background: #f5f7f6; color: #1d2935; font-family: Inter, syste
 .notice.success { background: #e4f6eb; color: #16603b; }
 .notice.error, .rejection-reason { background: #fff0ef; color: #a3211a !important; padding: 12px; border-radius: 8px; }
 @media (max-width: 620px) { .approval-page { padding: 20px 14px 45px; } .approval-card-heading { flex-direction: column; } .reject-form { flex-direction: column; } }
+
+/* Facility Approvals embedded in the shared Super Admin dashboard layout. */
+.content .approval-page { max-width: none; margin: 0; padding: 0 0 30px; }
+.content .approval-filters { margin-top: 0; }
+.content .approval-card h2 { font-size: 20px; }
+.content .approval-actions form { margin: 0; }
+@media (max-width: 620px) {
+    .content .approval-page { padding: 0; }
+}
