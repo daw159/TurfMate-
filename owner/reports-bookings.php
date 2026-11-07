@@ -356,7 +356,9 @@ tm_page_header('Reports & Analytics', 'reports', $owner);
         <a href="reports-inventory.php">
     Inventory &amp; Maintenance
 </a>
-        <span class="br-upcoming">Export <small>soon</small></span>
+        <a href="reports-export.php">
+    Export
+</a>
     </nav>
 
     <form class="br-filters" method="get" action="reports-bookings.php">

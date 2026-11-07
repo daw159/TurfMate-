@@ -1,0 +1,403 @@
+/* TurfMate · Reports & Analytics · Export & Custom Reports */
+.xr-page {
+    --xr-green: #216e48;
+    --xr-dark: #173f2b;
+    --xr-muted: #64776b;
+    --xr-border: #e0eae3;
+    display: grid;
+    gap: 24px;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 0 32px;
+    color: #203b2b;
+}
+
+.xr-page *,
+.xr-page *::before,
+.xr-page *::after {
+    box-sizing: border-box;
+}
+
+.xr-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.xr-kicker {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    color: #37845c;
+    margin-bottom: 8px;
+}
+
+.xr-heading h2 {
+    margin: 0 0 8px;
+    color: var(--xr-dark);
+    font-size: clamp(24px, 2.5vw, 34px);
+    line-height: 1.18;
+}
+
+.xr-heading p,
+.xr-panel-title p,
+.xr-preview-head p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--xr-muted);
+}
+
+.xr-chip {
+    background: #e8f5eb;
+    border: 1px solid #cce7d5;
+    border-radius: 22px;
+    color: #236b44;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 14px;
+}
+
+.xr-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.xr-tabs a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dce9df;
+    background: #fff;
+    color: #536e5d;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 11px 17px;
+    font-size: 13px;
+    font-weight: 750;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.xr-tabs a:hover,
+.xr-tabs a.active {
+    background: #e6f4e9;
+    color: var(--xr-green);
+    border-color: #b9dec7;
+}
+
+.xr-panel {
+    background: #fff;
+    border: 1px solid var(--xr-border);
+    border-radius: 17px;
+    box-shadow: 0 8px 28px rgba(18, 57, 32, .04);
+    overflow: hidden;
+}
+
+.xr-controls {
+    padding: 28px;
+}
+
+.xr-panel-title h3,
+.xr-preview-head h3 {
+    color: #1b4630;
+    font-size: 20px;
+    margin: 0 0 7px;
+}
+
+.xr-form {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    align-items: end;
+}
+
+.xr-form label {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    font-size: 13px;
+    font-weight: 750;
+    color: #365443;
+}
+
+.xr-form select,
+.xr-form input {
+    width: 100%;
+    min-width: 0;
+    background: #fff;
+    color: #243e2d;
+    padding: 12px 14px;
+    border: 1px solid #d6e3d9;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+.xr-form select:focus,
+.xr-form input:focus {
+    border-color: #4e9d72;
+    box-shadow: 0 0 0 3px rgba(33, 110, 72, .12);
+}
+
+.xr-form input:disabled {
+    background: #f4f7f5;
+    color: #8a998f;
+}
+
+.xr-form-actions,
+.xr-downloads {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.xr-primary,
+.xr-muted,
+.xr-outline {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    padding: 12px 17px;
+    min-height: 43px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.xr-primary {
+    background: var(--xr-green);
+    color: white;
+}
+
+.xr-primary:hover {
+    background: #195738;
+    color: white;
+}
+
+.xr-muted,
+.xr-outline {
+    background: #edf5ef;
+    color: #256747;
+    border-color: #d4e6da;
+}
+
+.xr-muted:hover,
+.xr-outline:hover {
+    background: #dfefe3;
+}
+
+.xr-preview-head {
+    padding: 26px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    border-bottom: 1px solid var(--xr-border);
+}
+
+.xr-note {
+    margin: 22px 28px;
+    border: 1px solid #d7e9dc;
+    background: #f3faf5;
+    color: #496953;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.xr-table-scroll {
+    overflow-x: auto;
+    padding: 0 28px 12px;
+}
+
+.xr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.xr-table th,
+.xr-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #e8eee9;
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.xr-table th {
+    background: #f5faf6;
+    color: #4d6a56;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.xr-table tbody tr:hover {
+    background: #f9fcfa;
+}
+
+.xr-empty {
+    padding: 32px 14px !important;
+    text-align: center !important;
+    color: var(--xr-muted);
+}
+
+.xr-table-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 14px 28px 23px;
+    color: var(--xr-muted);
+    font-size: 12px;
+}
+
+.xr-error {
+    border: 1px solid #f0b7b7;
+    background: #fff0f0;
+    color: #9e2424;
+    border-radius: 11px;
+    padding: 14px 18px;
+    font-size: 13px;
+}
+
+.xr-hint {
+    background: #f4f8f5;
+    padding: 15px 19px;
+    border-radius: 12px;
+    border: 1px solid var(--xr-border);
+    color: #5a6e5f;
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+@media (max-width: 1080px) {
+    .xr-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 660px) {
+    .xr-page {
+        gap: 17px;
+    }
+
+    .xr-form {
+        grid-template-columns: 1fr;
+    }
+
+    .xr-controls,
+    .xr-preview-head {
+        padding: 20px;
+    }
+
+    .xr-note {
+        margin: 17px 20px;
+    }
+
+    .xr-table-scroll {
+        padding: 0 20px 10px;
+    }
+
+    .xr-table-footer {
+        padding: 13px 20px 20px;
+    }
+}
+
+/* Browser Print / Save as PDF: remove app chrome and show full report. */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 12mm;
+    }
+
+    body,
+    .app-shell,
+    .main-area,
+    .content {
+        background: #fff !important;
+        color: #222 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .sidebar,
+    .topbar,
+    .footer,
+    .xr-tabs,
+    .xr-controls,
+    .xr-heading,
+    .xr-hint,
+    .xr-downloads,
+    .xr-error,
+    .xr-table-footer {
+        display: none !important;
+    }
+
+    .xr-page {
+        display: block;
+        max-width: none;
+    }
+
+    .xr-preview {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+    }
+
+    .xr-preview-head {
+        display: block;
+        padding: 0 0 15px;
+    }
+
+    .xr-preview-head::before {
+        content: 'TurfMate | Reports & Analytics';
+        display: block;
+        color: #246444;
+        font-weight: 800;
+        font-size: 13px;
+        margin-bottom: 13px;
+    }
+
+    .xr-table-scroll {
+        overflow: visible;
+        padding: 0;
+    }
+
+    .xr-table {
+        font-size: 10px;
+    }
+
+    .xr-table th,
+    .xr-table td {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        padding: 7px;
+    }
+
+    .xr-table thead {
+        display: table-header-group;
+    }
+
+    .xr-table tr {
+        break-inside: avoid;
+    }
+
+    .xr-note {
+        margin: 12px 0 18px;
+        padding: 9px;
+    }
+}

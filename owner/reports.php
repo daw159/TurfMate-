@@ -365,7 +365,7 @@ $tabs = [
     'Financial' => 'reports-financial.php',
     'Bookings' => 'reports-bookings.php',
     'Inventory & Maintenance' => 'reports-inventory.php',
-    'Export' => null,
+    'Export' => 'reports-export.php',
 ];
 
 tm_page_header('Reports & Analytics', 'reports', $owner);
