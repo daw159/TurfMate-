@@ -1,0 +1,727 @@
+
+:root {
+    --green: #216E48;
+    --green-dark: #195A3A;
+    --background: #F5F6F8;
+    --white: #FFFFFF;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    padding: 85px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+
+/* ==============================
+   NAVIGATION BAR
+============================== */
+
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.logo span:last-child {
+    color: var(--green);
+}
+
+.logo-icon {
+    margin-right: 8px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--green);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--green-dark);
+}
+
+.btn-outline {
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+
+.btn-outline:hover {
+    background: #eef7f1;
+}
+
+.btn-large {
+    padding: 15px 25px;
+    font-size: 16px;
+}
+
+.btn-light {
+    background: white;
+    color: var(--green);
+    border: 1px solid var(--border);
+}
+
+.btn-white {
+    background: white;
+    color: var(--green);
+}
+
+/* ==============================
+   HERO SECTION
+============================== */
+
+.hero {
+    background: linear-gradient(135deg, #f0f8f3, #ffffff);
+    padding: 100px 0;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 65px;
+}
+
+.eyebrow,
+.section-label {
+    display: inline-block;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 62px);
+    line-height: 1.15;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--green);
+}
+
+.hero-text > p {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 510px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.hero-note {
+    margin-top: 28px;
+    font-size: 14px !important;
+}
+
+/* Football pitch illustration */
+
+.hero-visual {
+    position: relative;
+}
+
+.pitch {
+    position: relative;
+    height: 340px;
+    background: linear-gradient(135deg, #216e48, #164b32);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 25px 55px rgba(33, 110, 72, 0.2);
+}
+
+.pitch::before {
+    content: "";
+    position: absolute;
+    inset: 25px;
+    border: 3px solid rgba(255,255,255,0.6);
+    border-radius: 5px;
+}
+
+.pitch-midline {
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    bottom: 25px;
+    border-left: 3px solid rgba(255,255,255,0.6);
+}
+
+.pitch-circle {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border: 3px solid rgba(255,255,255,0.6);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pitch-box {
+    position: absolute;
+    width: 75px;
+    height: 150px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 3px solid rgba(255,255,255,0.6);
+}
+
+.pitch-box-left {
+    left: 25px;
+    border-left: none;
+}
+
+.pitch-box-right {
+    right: 25px;
+    border-right: none;
+}
+
+.pitch-ball {
+    position: absolute;
+    top: 46%;
+    left: 48%;
+    font-size: 34px;
+}
+
+.hero-floating-card {
+    position: absolute;
+    bottom: -25px;
+    left: 25px;
+    background: white;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+}
+
+.hero-floating-card > span {
+    font-size: 30px;
+}
+
+.hero-floating-card strong,
+.hero-floating-card small {
+    display: block;
+}
+
+.hero-floating-card small {
+    color: var(--muted);
+}
+
+/* ==============================
+   SECTION HEADINGS
+============================== */
+
+.section-heading h2 {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    color: var(--muted);
+}
+
+/* ==============================
+   SPORTS CARDS
+============================== */
+
+.sports-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.sport-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 35px;
+    border-radius: 14px;
+    transition: 0.2s ease;
+}
+
+.sport-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+}
+
+.sport-icon {
+    font-size: 42px;
+    margin-bottom: 18px;
+}
+
+.sport-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.sport-card p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.sport-card > span {
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* ==============================
+   FEATURED ARENAS
+============================== */
+
+.arenas-section {
+    background: var(--background);
+}
+
+.arena-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.arena-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: 0.2s ease;
+}
+
+.arena-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.arena-image {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.arena-image.football {
+    background: #d8eee1;
+}
+
+.arena-image.cricket {
+    background: #e8e9d4;
+}
+
+.arena-image.padel {
+    background: #dce9f7;
+}
+
+.arena-image-icon {
+    font-size: 65px;
+}
+
+.arena-sport-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.arena-info {
+    padding: 25px;
+}
+
+.arena-info h3 {
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.arena-location {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.arena-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.arena-price strong {
+    color: var(--green);
+    font-size: 19px;
+}
+
+.arena-price span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.coming-soon {
+    color: var(--muted);
+    background: var(--background);
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+.sample-note {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ==============================
+   HOW IT WORKS
+============================== */
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.step-card {
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.step-number {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.step-icon {
+    font-size: 35px;
+    margin: 20px 0;
+}
+
+.step-card h3 {
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.step-card p {
+    color: var(--muted);
+}
+
+/* ==============================
+   OWNER SECTION
+============================== */
+
+.owner-section {
+    background: var(--green);
+    color: white;
+    padding: 65px 0;
+}
+
+.owner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.owner-content h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.owner-content p {
+    max-width: 600px;
+    opacity: 0.9;
+}
+
+.owner-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    background: #17251d;
+    color: white;
+    padding: 50px 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-content h2 {
+    font-size: 25px;
+}
+
+.footer-content p {
+    color: #b6c2ba;
+}
+
+.footer-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.footer-bottom {
+    border-top: 1px solid #35443a;
+    margin-top: 40px;
+    padding-top: 20px;
+    text-align: center;
+    color: #b6c2ba;
+    font-size: 13px;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+@media (max-width: 900px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+
+    .sports-grid,
+    .arena-grid,
+    .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .owner-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 65px 0;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .sports-grid,
+    .arena-grid,
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-content {
+        flex-wrap: wrap;
+    }
+
+    .nav-actions {
+        width: 100%;
+    }
+
+    .hero-floating-card {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: 15px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+
+    .footer-content,
+    .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.cricket-ground {
+    height: 340px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    background: repeating-linear-gradient(
+        90deg,
+        #216E48 0,
+        #216E48 48px,
+        #287A50 48px,
+        #287A50 96px
+    );
+    box-shadow: 0 25px 55px rgba(33, 110, 72, 0.2);
+}
+
+.cricket-boundary {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    top: 7.5%;
+    left: 7.5%;
+}
+
+.cricket-pitch {
+    position: absolute;
+    width: 85px;
+    height: 230px;
+    background: #D5B78A;
+    border-radius: 4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.crease {
+    position: absolute;
+    left: -12px;
+    width: calc(100% + 24px);
+    height: 3px;
+    background: white;
+}
+
+.crease-top {
+    top: 25px;
+}
+
+.crease-bottom {
+    bottom: 25px;
+}
+
+.stumps {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+}
+
+.stumps-top {
+    top: 10px;
+}
+
+.stumps-bottom {
+    bottom: 10px;
+}
+
+.stumps span {
+    width: 4px;
+    height: 15px;
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+
+.cricket-ball {
+    position: absolute;
+    right: 20%;
+    top: 45%;
+    font-size: 36px;
+}
