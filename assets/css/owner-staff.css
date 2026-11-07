@@ -38,3 +38,7 @@
     .staff-create-form { grid-template-columns: 1fr; }
     .staff-panel { padding: 16px; }
 }
+
+.staff-inline-form { margin: 5px 6px 5px 0; }
+.staff-table td:last-child { min-width: 200px; }
+.staff-edit form { display: grid; gap: 8px; }

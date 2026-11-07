@@ -7,13 +7,8 @@ require_once __DIR__ . '/_layout.php';
 /** Owner staff management: all assignment mutations are scoped to this owner. */
 $errors = [];
 $facilitiesStmt = $pdo->prepare(
-    "SELECT id, name
-     FROM facilities
-     WHERE owner_id = ?
-       AND deleted_at IS NULL
-       AND status = 'active'
-       AND approval_status = 'approved'
-     ORDER BY name"
+    "SELECT id, name FROM facilities WHERE owner_id = ? AND deleted_at IS NULL
+       AND status = 'active' AND approval_status = 'approved' ORDER BY name"
 );
 $facilitiesStmt->execute([$ownerId]);
 $facilities = $facilitiesStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -63,15 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $newStaffId = (int) $pdo->lastInsertId();
 
                 $assign = $pdo->prepare(
-    "INSERT INTO staff_assignments (facility_id, staff_id, status)
-     SELECT id, ?, 'active'
-     FROM facilities
-     WHERE id = ?
-       AND owner_id = ?
-       AND deleted_at IS NULL
-       AND status = 'active'
-       AND approval_status = 'approved'"
-);
+                    "INSERT INTO staff_assignments (facility_id, staff_id, status)
+                     SELECT id, ?, 'active' FROM facilities
+                     WHERE id = ? AND owner_id = ? AND deleted_at IS NULL
+                       AND status = 'active' AND approval_status = 'approved'"
+                );
                 foreach ($selected as $facilityId) {
                     $assign->execute([$newStaffId, $facilityId, $ownerId]);
                     if ($assign->rowCount() !== 1) {
@@ -82,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 tm_flash('success', 'Staff account created. Share the temporary password privately.');
                 tm_redirect('staff.php');
             }
-        } elseif (in_array($action, ['save', 'deactivate', 'activate'], true)) {
+        } elseif (in_array($action, ['save', 'deactivate', 'activate', 'remove'], true)) {
             if ($staffId < 1) {
                 throw new RuntimeException('Invalid staff account.');
             }
@@ -102,7 +93,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new RuntimeException('Staff account not found for this owner.');
             }
 
-            if ($action === 'save') {
+            if ($action === 'remove') {
+                // Revoke only this owner's facility assignments. Keep users and
+                // booking history intact; FK references prevent unsafe hard deletes.
+                $remove = $pdo->prepare(
+                    'DELETE sa FROM staff_assignments sa
+                     JOIN facilities f ON f.id = sa.facility_id
+                     WHERE sa.staff_id = ? AND f.owner_id = ?'
+                );
+                $remove->execute([$staffId, $ownerId]);
+                $remaining = $pdo->prepare(
+                    'SELECT COUNT(*) FROM staff_assignments WHERE staff_id = ?'
+                );
+                $remaining->execute([$staffId]);
+                if ((int) $remaining->fetchColumn() === 0) {
+                    $disableAccount = $pdo->prepare(
+                        "UPDATE users SET status = 'inactive' WHERE id = ? AND role = 'staff'"
+                    );
+                    $disableAccount->execute([$staffId]);
+                }
+                tm_flash('success', 'Staff removed from your team. Booking history was retained.');
+            } elseif ($action === 'save') {
                 $selected = array_unique(array_map('intval', (array) ($_POST['facilities'] ?? [])));
                 if (array_diff($selected, $facilityIds)) {
                     throw new RuntimeException('Invalid facility selection.');
@@ -116,50 +127,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $disable->execute([$staffId, $ownerId]);
                 $upsert = $pdo->prepare(
-    "INSERT INTO staff_assignments (facility_id, staff_id, status)
-     SELECT id, ?, 'active'
-     FROM facilities
-     WHERE id = ?
-       AND owner_id = ?
-       AND deleted_at IS NULL
-       AND status = 'active'
-       AND approval_status = 'approved'
-     ON DUPLICATE KEY UPDATE status = 'active'"
-);
+                    "INSERT INTO staff_assignments (facility_id, staff_id, status)
+                     SELECT id, ?, 'active' FROM facilities
+                     WHERE id = ? AND owner_id = ? AND deleted_at IS NULL
+                       AND status = 'active' AND approval_status = 'approved'
+                     ON DUPLICATE KEY UPDATE status = 'active'"
+                );
                 foreach ($selected as $facilityId) {
-    $upsert->execute([
-        $staffId,
-        $facilityId,
-        $ownerId
-    ]);
-
-    if ($upsert->rowCount() === 0) {
-        throw new RuntimeException(
-            'Facility assignment failed or facility is not approved.'
-        );
-    }
-}
+                    $upsert->execute([$staffId, $facilityId, $ownerId]);
+                }
                 tm_flash('success', 'Facility assignments updated.');
             } else {
                 // Disable this owner's assignments only; do not disable a shared account.
                 $status = $action === 'activate' ? 'active' : 'inactive';
                 $update = $pdo->prepare(
-    "UPDATE staff_assignments sa
-     JOIN facilities f ON f.id = sa.facility_id
-     SET sa.status = ?
-     WHERE sa.staff_id = ?
-       AND f.owner_id = ?
-       AND (
-           ? = 'inactive'
-           OR (
-               f.deleted_at IS NULL
-               AND f.status = 'active'
-               AND f.approval_status = 'approved'
-           )
-       )"
-);
-
-$update->execute([$status, $staffId, $ownerId, $status]);                $update->execute([$status, $staffId, $ownerId]);
+                    "UPDATE staff_assignments sa
+                     JOIN facilities f ON f.id = sa.facility_id
+                     SET sa.status = ? WHERE sa.staff_id = ? AND f.owner_id = ?
+                       AND (? = 'inactive' OR (f.deleted_at IS NULL AND f.status = 'active'
+                       AND f.approval_status = 'approved'))"
+                );
+                $update->execute([$status, $staffId, $ownerId, $status]);
                 tm_flash('success', 'Staff access updated for your facilities.');
             }
             $pdo->commit();
@@ -172,9 +160,9 @@ $update->execute([$status, $staffId, $ownerId, $status]);                $update
             $pdo->rollBack();
         }
         error_log('Staff management database error: ' . $exception->getMessage());
-        $errors[] = $exception->getCode() === '23000'
-            ? 'This email address is already registered.'
-            : 'Could not save staff information. Please try again.';
+        $errors[] = ($exception->errorInfo[1] ?? 0) === 1062
+            ? 'This email or assignment is already registered.'
+            : 'Could not save staff information. Please check the server error log.';
     } catch (RuntimeException $exception) {
         if ($pdo->inTransaction()) {
             $pdo->rollBack();
@@ -217,7 +205,8 @@ tm_page_header('Staff Management', 'staff', $owner);
 <section class="staff-panel">
     <h3>Add Staff Member</h3>
     <?php if (!$facilities): ?>
-           <?php else: ?>
+        <p>Only approved, active facilities can have staff assigned.</p>
+    <?php else: ?>
         <form method="post" class="staff-create-form" autocomplete="off">
             <input type="hidden" name="csrf" value="<?= tm_e(tm_csrf()) ?>">
             <input type="hidden" name="action" value="create">
@@ -285,6 +274,12 @@ tm_page_header('Staff Management', 'staff', $owner);
                                     <input type="hidden" name="action" value="activate">
                                     <button class="staff-secondary" type="submit">Enable access</button>
                                 <?php endif; ?>
+                            </form>
+                            <form method="post" class="staff-inline-form" onsubmit="return confirm('Remove this staff member from your team? Their booking history will remain.');">
+                                <input type="hidden" name="csrf" value="<?= tm_e(tm_csrf()) ?>">
+                                <input type="hidden" name="staff_id" value="<?= (int) $member['id'] ?>">
+                                <input type="hidden" name="action" value="remove">
+                                <button class="staff-danger" type="submit">Remove staff</button>
                             </form>
                         </td>
                     </tr>
