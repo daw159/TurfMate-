@@ -189,7 +189,7 @@ $staffMembers = $list->fetchAll(PDO::FETCH_ASSOC);
 
 tm_page_header('Staff Management', 'staff', $owner);
 ?>
-<link rel="stylesheet" href="../assets/css/owner-staff.css?v=1">
+<link rel="stylesheet" href="../assets/css/owner-staff.css?v=2">
 <section class="staff-intro">
     <div>
         <h2>Manage your team</h2>
