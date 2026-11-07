@@ -51,6 +51,7 @@ function staffLayoutStart(string $title, string $active): void
     $facilityClass = $active === 'facilities' ? 'active' : '';
     $inventoryClass = $active === 'inventory' ? 'active' : '';
     $manualClass = $active === 'manual' ? 'active' : '';
+    $maintenanceClass = $active === 'maintenance' ? 'active' : '';
     echo <<<HTML
     <!doctype html>
     <html lang="en">
@@ -61,6 +62,7 @@ function staffLayoutStart(string $title, string $active): void
         <link rel="stylesheet" href="../assets/css/staff.css?v=1">
         <link rel="stylesheet" href="../assets/css/staff-extra.css?v=1">
         <link rel="stylesheet" href="../assets/css/staff-manual.css?v=1">
+        <link rel="stylesheet" href="../assets/css/staff-maintenance.css?v=1">
     </head>
     <body>
         <div class="app">
@@ -72,6 +74,7 @@ function staffLayoutStart(string $title, string $active): void
                 <a class="nav-link {$manualClass}" href="manual-booking.php">＋ Manual Booking</a>
                 <a class="nav-link {$facilityClass}" href="facilities.php">▧ Facilities &amp; Pricing</a>
                 <a class="nav-link {$inventoryClass}" href="inventory.php">▣ Inventory</a>
+                <a class="nav-link {$maintenanceClass}" href="maintenance.php">⚒ Maintenance</a>
                 <div class="sidebar-bottom"><a class="nav-link" href="../auth/logout.php">↪ Log out</a></div>
             </aside>
             <main class="main">

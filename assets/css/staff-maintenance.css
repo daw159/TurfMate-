@@ -1,0 +1,25 @@
+/* Staff maintenance: read-only operational view. */
+.mt-wrap { max-width: 1180px; margin: 32px auto; padding: 0 24px; color: #1f2937; }
+.mt-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 22px; }
+.mt-heading h1 { margin: 0 0 8px; font-size: 26px; color: #17633f; }
+.mt-heading p { margin: 0; color: #64748b; }
+.mt-readonly { padding: 8px 12px; border-radius: 18px; background: #e9f5ee; color: #17633f; font-weight: 700; white-space: nowrap; }
+.mt-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; background: white; border: 1px solid #e5e7eb; padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+.mt-filters label { font-weight: 600; font-size: 13px; }
+.mt-filters select { min-width: 175px; padding: 10px; border: 1px solid #d1d5db; border-radius: 7px; background: white; }
+.mt-filters button { border: 0; border-radius: 7px; padding: 11px 22px; color: white; background: #216e48; font-weight: 700; cursor: pointer; }
+.mt-panel { background: white; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+.mt-panel-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; }
+.mt-panel-header h2 { font-size: 18px; margin: 0; }
+.mt-panel-header span { color: #64748b; font-size: 13px; }
+.mt-table-scroll { overflow-x: auto; }
+.mt-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 720px; }
+.mt-table th, .mt-table td { padding: 15px 18px; border-top: 1px solid #edf0f2; vertical-align: top; }
+.mt-table th { background: #f8faf9; color: #475569; text-transform: uppercase; font-size: 11px; letter-spacing: .04em; }
+.mt-table td { font-size: 13px; }
+.mt-status { display: inline-block; padding: 6px 10px; border-radius: 14px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.mt-status-planned { background: #fff5db; color: #925c0a; }
+.mt-status-in_progress { background: #e4efff; color: #1d4f9a; }
+.mt-status-completed { background: #e5f5e9; color: #17633f; }
+.mt-empty { padding: 30px 20px; color: #64748b; }
+@media(max-width:700px) { .mt-wrap { padding: 0 14px; margin: 20px auto; } .mt-heading { align-items: flex-start; } .mt-filters { align-items: stretch; flex-direction: column; } .mt-filters select { width: 100%; } }
