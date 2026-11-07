@@ -1,0 +1,174 @@
+/* TurfMate shared customer navigation, footer and dashboard.
+   Loaded AFTER booking.css; scoped selectors prevent booking UI regressions. */
+:root {
+    --customer-green: #216e48;
+    --customer-dark: #163e2e;
+    --customer-pale: #e8f3ec;
+}
+
+body.customer-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.customer-app > main {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+.customer-header {
+    position: relative;
+    z-index: 20;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.customer-header-inner {
+    max-width: 1300px;
+    min-height: 78px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.customer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--customer-green);
+    font-size: 23px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.customer-logo-icon {
+    display: grid;
+    place-items: center;
+    width: 41px;
+    height: 41px;
+    border-radius: 11px;
+    background: var(--customer-green);
+    color: #fff;
+    font-weight: 800;
+}
+
+.customer-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+}
+
+.customer-navigation a {
+    padding: 11px 15px;
+    border-radius: 9px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+}
+
+.customer-navigation a:hover {
+    color: var(--customer-green);
+    background: var(--customer-pale);
+}
+
+.customer-navigation a.active {
+    color: #fff;
+    background: var(--customer-green);
+}
+
+.customer-navigation .customer-logout { color: #ad312a; }
+.customer-navigation .customer-logout:hover { color: #92251e; background: #fff0f0; }
+
+.customer-footer {
+    margin-top: auto;
+    width: 100%;
+    background: var(--customer-dark);
+    color: #fff;
+}
+
+.customer-footer-inner {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 52px 30px 42px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+}
+
+.customer-footer-about h3 { margin: 0 0 14px; font-size: 25px; color: #fff; }
+.customer-footer-about p { max-width: 360px; margin: 0; color: #b6d0c2; font-size: 14px; line-height: 1.8; }
+.customer-footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.customer-footer-links h4 { margin: 0 0 5px; color: #fff; font-size: 15px; }
+.customer-footer-links a { color: #b6d0c2; font-size: 13px; text-decoration: none; }
+.customer-footer-links a:hover { color: #fff; }
+.customer-footer-bottom {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    border-top: 1px solid #35604a;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #a8c7b5;
+    font-size: 12px;
+}
+
+/* Dashboard-specific appearance */
+.customer-hero {
+    background: linear-gradient(115deg, #195a3a, #287b51);
+    color: #fff;
+    padding: 72px 26px;
+}
+.customer-hero-inner { max-width: 1150px; margin: 0 auto; }
+.customer-eyebrow { margin: 0 0 12px; font-size: 12px; letter-spacing: 2px; color: #d6e9de; }
+.customer-hero h1 { margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; }
+.customer-hero p:not(.customer-eyebrow) { max-width: 620px; margin: 0 0 24px; color: #e5f1ea; line-height: 1.7; }
+.customer-hero .customer-hero-button { background: #fff; color: var(--customer-dark); border-color: #fff; }
+.customer-hero .customer-hero-button:hover { background: #e8f3ec; color: var(--customer-dark); }
+.customer-dashboard-content { max-width: 1190px; margin: 0 auto; padding: 46px 20px 70px; }
+.customer-dashboard-content h2 { margin: 0 0 7px; font-size: 27px; }
+.customer-dashboard-subtitle { margin: 0 0 28px; color: #6b7280; }
+.customer-dashboard-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.customer-dashboard-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 28px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: white;
+    transition: transform .2s, box-shadow .2s;
+}
+.customer-dashboard-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px #0e3c2017; }
+.customer-dashboard-icon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 18px; border-radius: 14px; background: #e8f3ed; font-size: 25px; }
+.customer-dashboard-card h3 { margin: 0 0 10px; font-size: 21px; }
+.customer-dashboard-card p { flex: 1; margin: 0 0 23px; color: #6b7280; line-height: 1.7; }
+.customer-dashboard-card .btn { align-self: flex-start; }
+.customer-empty-bookings { margin: 18px 0 0; }
+
+@media (max-width: 850px) {
+    .customer-header-inner { flex-direction: column; gap: 15px; }
+    .customer-navigation { justify-content: center; }
+    .customer-footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .customer-footer-about { grid-column: 1 / -1; }
+    .customer-dashboard-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+    .customer-header-inner { padding: 16px 14px; }
+    .customer-navigation { gap: 3px; justify-content: center; }
+    .customer-navigation a { padding: 9px; font-size: 12px; }
+    .customer-footer-inner { grid-template-columns: 1fr; padding: 38px 24px; }
+    .customer-footer-about { grid-column: auto; }
+    .customer-footer-bottom { flex-direction: column; text-align: center; padding: 20px; }
+    .customer-hero { padding: 55px 20px; }
+    .customer-dashboard-content { padding: 32px 14px 45px; }
+}
