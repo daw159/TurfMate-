@@ -161,7 +161,12 @@ staffLayoutStart('Bookings', 'bookings');
                         <input type="hidden" name="csrf" value="<?= staffEscape(staffCsrf()) ?>">
                         <input type="hidden" name="booking_id" value="<?= (int) $row['id'] ?>">
                         <input type="hidden" name="action" value="<?= staffEscape($action) ?>">
-                        <button class="small-button" type="submit"><?= staffEscape($label) ?></button>
+                        <button
+    class="small-button <?= in_array($action, ['cancelled', 'rejected'], true) ? 'btn-danger' : 'btn-success' ?>"
+    type="submit"
+>
+    <?= staffEscape($label) ?>
+</button>
                     </form>
                 <?php endforeach; ?>
             </td>
