@@ -1,0 +1,9 @@
+
+/* Staff facility and inventory forms */
+.staff-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: end; }
+.staff-form label { display: grid; gap: 6px; font-size: 13px; font-weight: 700; }
+.staff-form input, .staff-form select, .inline-form input, .inline-form select { width: 100%; min-width: 85px; padding: 9px; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.inline-form { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-width: 280px; }
+.inline-form input { flex: 1 1 95px; max-width: 145px; }
+.inline-form select { flex: 1 1 105px; }
+.main > .card { margin-bottom: 22px; }

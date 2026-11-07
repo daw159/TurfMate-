@@ -35,6 +35,7 @@ function staffAllowed(PDO $db, int $staffId, int $facilityId): bool
           AND sa.status = 'active'
           AND f.deleted_at IS NULL
           AND f.status = 'active'
+          AND f.approval_status = 'approved'
           AND owner.status = 'active'
         LIMIT 1
     SQL);
@@ -47,6 +48,8 @@ function staffLayoutStart(string $title, string $active): void
     $title = staffEscape($title);
     $dashboardClass = $active === 'dashboard' ? 'active' : '';
     $bookingClass = $active === 'bookings' ? 'active' : '';
+    $facilityClass = $active === 'facilities' ? 'active' : '';
+    $inventoryClass = $active === 'inventory' ? 'active' : '';
     echo <<<HTML
     <!doctype html>
     <html lang="en">
@@ -55,6 +58,7 @@ function staffLayoutStart(string $title, string $active): void
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{$title} | TurfMate Staff</title>
         <link rel="stylesheet" href="../assets/css/staff.css?v=1">
+        <link rel="stylesheet" href="../assets/css/staff-extra.css?v=1">
     </head>
     <body>
         <div class="app">
@@ -63,6 +67,8 @@ function staffLayoutStart(string $title, string $active): void
                 <div class="nav-label">WORKSPACE</div>
                 <a class="nav-link {$dashboardClass}" href="dashboard.php">▦ Dashboard</a>
                 <a class="nav-link {$bookingClass}" href="bookings.php">▤ Bookings</a>
+                <a class="nav-link {$facilityClass}" href="facilities.php">▧ Facilities &amp; Pricing</a>
+                <a class="nav-link {$inventoryClass}" href="inventory.php">▣ Inventory</a>
                 <div class="sidebar-bottom"><a class="nav-link" href="../auth/logout.php">↪ Log out</a></div>
             </aside>
             <main class="main">
@@ -85,6 +91,7 @@ function staffAssignments(PDO $db, int $staffId): array
         WHERE sa.staff_id = ?
           AND sa.status = 'active'
           AND f.status = 'active'
+          AND f.approval_status = 'approved'
           AND f.deleted_at IS NULL
           AND owner.status = 'active'
         ORDER BY f.name
