@@ -133,155 +133,108 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Sign Up | TurfMate</title>
-
     <link rel="stylesheet" href="../assets/css/auth.css">
+    <link rel="stylesheet" href="../assets/css/register.css?v=1">
 </head>
+<body class="register-page">
+    <main class="auth-container">
+        <div class="auth-card register-card">
+            <div class="register-brand">
+                <span class="register-logo" aria-hidden="true">T</span>
+                <div class="register-brand-copy">
+                    <strong>TurfMate</strong>
+                    <span>Find Your Turf. Book Your Game.</span>
+                </div>
+            </div>
 
-<body>
+            <div class="register-intro">
+                <span class="register-eyebrow">JOIN THE COMMUNITY</span>
+                <h1>Create your account</h1>
+                <p>Book your next game or manage your sports facility with TurfMate.</p>
+            </div>
 
-<div class="auth-container">
+            <?php if (!empty($errors)): ?>
+                <div class="error-box" role="alert">
+                    <?php foreach ($errors as $error): ?>
+                        <p><?= escape($error) ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
-    <div class="auth-card">
+            <form method="POST" action="register.php" class="register-form">
+                <input type="hidden" name="csrf_token" value="<?= escape($_SESSION['csrf_token']) ?>">
 
-        <div class="brand">
-            <h1>TurfMate</h1>
-            <p>Find Your Turf. Book Your Game.</p>
+                <fieldset class="register-role-group">
+                    <legend>Register as</legend>
+                    <div class="register-roles">
+                        <label class="register-role">
+                            <input type="radio" name="role" value="customer" <?= $role === 'customer' ? 'checked' : '' ?> >
+                            <span class="register-role-icon" aria-hidden="true">◈</span>
+                            <span class="register-role-copy"><strong>Customer</strong><small>Explore & book turfs</small></span>
+                            <span class="register-role-check" aria-hidden="true">✓</span>
+                        </label>
+                        <label class="register-role">
+                            <input type="radio" name="role" value="owner" <?= $role === 'owner' ? 'checked' : '' ?> >
+                            <span class="register-role-icon" aria-hidden="true">▦</span>
+                            <span class="register-role-copy"><strong>Arena Owner</strong><small>Manage your facilities</small></span>
+                            <span class="register-role-check" aria-hidden="true">✓</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="register-fields">
+                    <div class="register-field">
+                        <label for="name">Full name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" value="<?= escape($name) ?>" maxlength="100" autocomplete="name" required>
+                    </div>
+                    <div class="register-field">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" value="<?= escape($email) ?>" maxlength="150" autocomplete="email" required>
+                    </div>
+                    <div class="register-field">
+                        <label for="phone">Phone number <span class="optional">(optional)</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="03XX XXXXXXX" value="<?= escape($phone) ?>" maxlength="20" autocomplete="tel">
+                    </div>
+                    <div class="register-field">
+                        <label for="password">Password</label>
+                        <div class="password-input-wrap">
+                            <input type="password" id="password" name="password" placeholder="Minimum 8 characters" minlength="8" autocomplete="new-password" required>
+                            <button class="password-toggle" type="button" aria-label="Show password" aria-controls="password" aria-pressed="false">Show</button>
+                        </div>
+                    </div>
+                    <div class="register-field full-width">
+                        <label for="confirm_password">Confirm password</label>
+                        <div class="password-input-wrap">
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" minlength="8" autocomplete="new-password" required>
+                            <button class="password-toggle" type="button" aria-label="Show confirm password" aria-controls="confirm_password" aria-pressed="false">Show</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="auth-btn register-submit">Create account <span aria-hidden="true">→</span></button>
+            </form>
+
+            <p class="auth-footer">Already have an account? <a href="login.php">Sign in</a></p>
+            <p class="back-home"><a href="../index.php">← Back to homepage</a></p>
         </div>
-
-        <h2>Create Account</h2>
-
-        <p class="subtitle">
-            Join TurfMate and get started today.
-        </p>
-
-        <?php if (!empty($errors)): ?>
-
-            <div class="error-box">
-
-                <?php foreach ($errors as $error): ?>
-
-                    <p><?= escape($error) ?></p>
-
-                <?php endforeach; ?>
-
-            </div>
-
-        <?php endif; ?>
-
-        <form method="POST" action="register.php">
-
-            <input
-                type="hidden"
-                name="csrf_token"
-                value="<?= escape($_SESSION['csrf_token']) ?>"
-            >
-
-            <label>Register As</label>
-
-            <div class="role-selection">
-
-                <label class="role-option">
-                    <input
-                        type="radio"
-                        name="role"
-                        value="customer"
-                        <?= $role === 'customer' ? 'checked' : '' ?>
-                    >
-                    Customer
-                </label>
-
-                <label class="role-option">
-                    <input
-                        type="radio"
-                        name="role"
-                        value="owner"
-                        <?= $role === 'owner' ? 'checked' : '' ?>
-                    >
-                    Arena Owner
-                </label>
-
-            </div>
-
-            <label>Full Name</label>
-
-            <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                value="<?= escape($name) ?>"
-                maxlength="100"
-                required
-            >
-
-            <label>Email Address</label>
-
-            <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value="<?= escape($email) ?>"
-                maxlength="150"
-                required
-            >
-
-            <label>Phone Number</label>
-
-            <input
-                type="tel"
-                name="phone"
-                placeholder="03XX XXXXXXX"
-                value="<?= escape($phone) ?>"
-                maxlength="20"
-            >
-
-            <label>Password</label>
-
-            <input
-                type="password"
-                name="password"
-                placeholder="Minimum 8 characters"
-                minlength="8"
-                required
-            >
-
-            <label>Confirm Password</label>
-
-            <input
-                type="password"
-                name="confirm_password"
-                placeholder="Confirm your password"
-                minlength="8"
-                required
-            >
-
-            <button type="submit" class="auth-btn">
-                Create Account
-            </button>
-
-        </form>
-
-        <p class="auth-footer">
-            Already have an account?
-            <a href="login.php">Sign In</a>
-        </p>
-
-        <p class="back-home">
-            <a href="../index.php">← Back to Homepage</a>
-        </p>
-
-    </div>
-
-</div>
-
+    </main>
+    <script>
+    document.querySelectorAll('.password-toggle').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const input = document.getElementById(button.getAttribute('aria-controls'));
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            button.textContent = isHidden ? 'Hide' : 'Show';
+            button.setAttribute('aria-pressed', String(isHidden));
+            button.setAttribute('aria-label', (isHidden ? 'Hide ' : 'Show ') + (input.id === 'confirm_password' ? 'confirm password' : 'password'));
+        });
+    });
+    </script>
 </body>
 </html>

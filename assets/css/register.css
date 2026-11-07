@@ -1,0 +1,89 @@
+/* TurfMate registration page only. Loaded after shared auth.css. */
+.register-page {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at 5% 10%, rgba(58, 153, 99, .09), transparent 36%),
+                radial-gradient(circle at 95% 95%, rgba(33, 110, 72, .08), transparent 40%),
+                #f5f7f8;
+    color: #1f2937;
+}
+.register-page .auth-container { padding: 35px 16px; }
+.register-page .register-card {
+    width: 100%;
+    max-width: 660px;
+    padding: 36px 42px 30px;
+    background: #fff;
+    border: 1px solid #e1eae4;
+    border-radius: 20px;
+    box-shadow: 0 16px 55px rgba(20, 55, 37, .09);
+}
+.register-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+.register-logo {
+    display: grid; place-items: center; flex: 0 0 45px; width: 45px; height: 45px;
+    border-radius: 13px; background: #216e48; color: #fff; font-size: 25px; font-weight: 800;
+}
+.register-brand-copy strong { display: block; color: #216e48; font-size: 23px; letter-spacing: -.5px; line-height: 1.15; }
+.register-brand-copy span { display: block; margin-top: 3px; color: #718096; font-size: 12px; }
+.register-intro { margin-bottom: 23px; }
+.register-eyebrow { display: block; color: #216e48; font-size: 10px; letter-spacing: 1.6px; font-weight: 800; margin-bottom: 7px; }
+.register-intro h1 { font-size: clamp(23px, 4vw, 29px); letter-spacing: -.7px; line-height: 1.2; margin: 0 0 8px; }
+.register-intro p { color: #718096; font-size: 13px; line-height: 1.5; }
+.register-page .error-box { border-radius: 10px; }
+.register-page .error-box p:last-child { margin-bottom: 0; }
+.register-role-group { margin: 0 0 22px; padding: 0; border: 0; min-width: 0; }
+.register-role-group legend { margin-bottom: 10px; font-size: 13px; font-weight: 750; color: #2b3c32; }
+.register-roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.register-role {
+    position: relative; display: flex; align-items: center; gap: 11px;
+    min-height: 82px; padding: 14px;
+    border: 1px solid #dce6df; border-radius: 12px; background: #fff;
+    cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s;
+}
+.register-role:hover { background: #f8fcf9; border-color: #a8d2b7; }
+.register-role:has(input:checked) { border-color: #54a47a; background: #eff8f2; box-shadow: 0 0 0 1px #54a47a inset; }
+.register-role:focus-within { outline: 3px solid rgba(33, 110, 72, .2); outline-offset: 2px; }
+.register-role input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.register-role-icon { display: grid; place-items: center; flex: 0 0 35px; width: 35px; height: 35px; border-radius: 10px; background: #eaf3ed; color: #216e48; font-size: 20px; }
+.register-role-copy { min-width: 0; }
+.register-role-copy strong { display: block; font-size: 13px; color: #20382b; }
+.register-role-copy small { display: block; margin-top: 4px; font-size: 11px; color: #657c70; }
+.register-role-check { margin-left: auto; color: #216e48; font-size: 17px; font-weight: 800; opacity: 0; }
+.register-role:has(input:checked) .register-role-check { opacity: 1; }
+.register-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 15px; }
+.register-field { min-width: 0; }
+.register-field.full-width { grid-column: 1 / -1; }
+.register-field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #2b3c32; }
+.register-field .optional { font-size: 11px; font-weight: 500; color: #8a9690; }
+.register-field > input, .password-input-wrap input {
+    display: block; width: 100%; min-width: 0; height: 45px; margin: 0;
+    padding: 11px 13px; border: 1px solid #d7e2da; border-radius: 10px;
+    outline: none; color: #21392c; background: #fff; font: inherit; font-size: 13px;
+    transition: border-color .15s, box-shadow .15s;
+}
+.register-field input::placeholder { color: #98a49e; }
+.register-field input:focus { border-color: #216e48; box-shadow: 0 0 0 3px rgba(33,110,72,.11); }
+.password-input-wrap { position: relative; }
+.password-input-wrap input { padding-right: 66px; }
+.password-toggle { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); background: transparent; border: 0; border-radius: 7px; padding: 8px; cursor: pointer; color: #216e48; font-size: 12px; font-weight: 700; }
+.password-toggle:hover { background: #eaf3ed; }
+.password-toggle:focus-visible { outline: 2px solid #216e48; }
+.register-page .register-submit {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 22px; min-height: 47px; border-radius: 10px; font-size: 14px;
+    transition: background .15s, transform .15s;
+}
+.register-page .register-submit:hover { background: #195a3a; transform: translateY(-1px); }
+.register-page .register-submit:focus-visible { outline: 3px solid #8fc9a7; outline-offset: 3px; }
+.register-page .auth-footer { margin-top: 21px; font-size: 13px; }
+.register-page .back-home { margin-top: 16px; font-size: 12px; }
+.register-page .auth-footer a:hover, .register-page .back-home a:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+    .register-page .auth-container { padding: 16px 12px; }
+    .register-page .register-card { padding: 25px 21px; border-radius: 16px; }
+    .register-fields { grid-template-columns: 1fr; }
+    .register-field.full-width { grid-column: auto; }
+    .register-role { min-height: 76px; padding: 10px; gap: 8px; }
+    .register-role-icon { flex-basis: 30px; width: 30px; height: 30px; font-size: 17px; }
+}
+@media (max-width: 380px) {
+    .register-roles { grid-template-columns: 1fr; }
+}

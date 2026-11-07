@@ -1,0 +1,261 @@
+:root {
+    --primary: #216E48;
+    --background: #F5F6F8;
+    --white: #FFFFFF;
+    --text: #1F2937;
+    --secondary: #6B7280;
+    --border: #E5E7EB;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+}
+
+.auth-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 460px;
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand h1 {
+    color: var(--primary);
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.brand p {
+    color: var(--secondary);
+    font-size: 13px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--secondary);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+form > label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+form > input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+form > input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(33, 110, 72, 0.1);
+}
+
+.role-selection {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.role-option {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.role-option:has(input:checked) {
+    border-color: var(--primary);
+    background: #F0F7F3;
+    color: var(--primary);
+}
+
+.role-option input {
+    accent-color: var(--primary);
+    margin-right: 5px;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-btn:hover {
+    background: #195A3A;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: var(--secondary);
+}
+
+.auth-footer a,
+.back-home a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-home {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.error-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #B91C1C;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.error-box p {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 25px 20px;
+    }
+
+    .role-selection {
+        flex-direction: column;
+    }
+}
+
+
+/* ======================================
+   TurfMate Login Role Cards
+====================================== */
+
+.login-roles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.login-role-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    padding: 18px 10px;
+
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+
+    background: #FFFFFF;
+    color: #1F2937;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.login-role-card:hover {
+    border-color: #216E48;
+    background: #F0F7F3;
+}
+
+.login-role-card:has(input:checked) {
+    border: 2px solid #216E48;
+    background: #F0F7F3;
+    color: #216E48;
+}
+
+.login-role-card:focus-within {
+    outline: 2px solid #216E48;
+    outline-offset: 2px;
+}
+
+.login-role-card input {
+    position: absolute;
+    opacity: 0;
+}
+
+.role-icon {
+    font-size: 23px;
+}
+
+/* Success message after registration */
+
+.success-box {
+    background: #F0F7F3;
+    color: #216E48;
+    border: 1px solid #A7D8B7;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Responsive login cards */
+
+@media (max-width: 480px) {
+
+    .login-roles {
+        gap: 8px;
+    }
+
+    .login-role-card {
+        padding: 15px 6px;
+        font-size: 12px;
+    }
+
+}

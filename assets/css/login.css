@@ -1,0 +1,71 @@
+/* TurfMate login-only refinements. Loaded after auth.css; registration is unaffected. */
+body.login-page {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(ellipse at 15% 5%, #e7f3eb 0, transparent 45%),
+                radial-gradient(ellipse at 95% 95%, #eaf4ee 0, transparent 42%),
+                #f5f7f8;
+}
+.login-page .auth-container { padding: 32px 16px; }
+.login-page .auth-card {
+    max-width: 470px;
+    padding: 38px 38px 32px;
+    border-radius: 18px;
+    border-color: #e1eae4;
+    box-shadow: 0 18px 55px rgba(20, 62, 42, .09), 0 2px 10px rgba(20, 62, 42, .03);
+}
+.login-page .brand { margin-bottom: 32px; }
+.login-brand-row { display: flex; align-items: center; justify-content: center; gap: 11px; margin-bottom: 10px; }
+.login-brand-icon {
+    width: 43px; height: 43px; border-radius: 12px;
+    display: inline-grid; place-items: center;
+    background: #216e48; color: #fff;
+    font-size: 26px; font-weight: 800;
+}
+.login-brand-name { font-size: 29px; font-weight: 800; color: #216e48; letter-spacing: -.9px; }
+.login-page .brand p { color: #718078; font-size: 12px; letter-spacing: .1px; }
+.login-page h2 { font-size: 25px; letter-spacing: -.65px; margin-bottom: 6px; }
+.login-page .subtitle { line-height: 1.5; margin-bottom: 27px; }
+.login-page form > label { margin-bottom: 9px; color: #283c31; font-size: 13px; }
+.login-page form > input:not([type="hidden"]),
+.login-page .login-password-field input {
+    width: 100%; height: 46px; margin-bottom: 21px;
+    padding: 12px 14px; font: inherit; font-size: 14px;
+    border: 1px solid #d6e1d9; border-radius: 10px;
+    background: #fff; color: #20312b;
+    transition: border-color .18s, box-shadow .18s;
+}
+.login-page form input:focus { border-color: #216e48; box-shadow: 0 0 0 4px rgba(33, 110, 72, .11); }
+.login-page .login-password-field { position: relative; }
+.login-page .login-password-field input { padding-right: 70px; }
+.login-page .login-toggle-password {
+    position: absolute; top: 7px; right: 8px;
+    background: transparent; border: 0; border-radius: 7px;
+    padding: 8px 9px; color: #216e48; font: inherit;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.login-page .login-toggle-password:hover { background: #eaf5ee; }
+.login-page .login-toggle-password:focus-visible,
+.login-page a:focus-visible,
+.login-page .auth-btn:focus-visible { outline: 3px solid #89c5a4; outline-offset: 3px; }
+.login-page .auth-btn {
+    min-height: 47px; border-radius: 10px;
+    font: inherit; font-size: 14px; font-weight: 750;
+    transition: background .18s, transform .18s, box-shadow .18s;
+}
+.login-page .auth-btn:hover { background: #195a3a; box-shadow: 0 7px 15px rgba(33, 110, 72, .15); }
+.login-page .auth-btn:active { transform: translateY(1px); }
+.login-page .auth-footer { margin-top: 25px; line-height: 1.5; }
+.login-page .back-home { margin-top: 19px; }
+.login-page .auth-footer a:hover,
+.login-page .back-home a:hover { text-decoration: underline; }
+.login-page .error-box p:last-child { margin-bottom: 0; }
+@media (max-width: 480px) {
+    .login-page .auth-container { padding: 18px 12px; }
+    .login-page .auth-card { padding: 30px 22px 27px; border-radius: 15px; }
+    .login-brand-name { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .login-page .auth-btn,
+    .login-page form > input:not([type="hidden"]),
+    .login-page .login-password-field input { transition: none; }
+}

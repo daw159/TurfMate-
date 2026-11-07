@@ -164,9 +164,10 @@ function escape(string $value): string
     <title>Sign In | TurfMate</title>
 
     <link rel="stylesheet" href="../assets/css/auth.css">
+    <link rel="stylesheet" href="../assets/css/login.css?v=1">
 </head>
 
-<body>
+<body class="login-page">
 
 <div class="auth-container">
 
@@ -174,7 +175,10 @@ function escape(string $value): string
 
         <!-- Branding -->
         <div class="brand">
-            <h1>TurfMate</h1>
+            <div class="login-brand-row">
+                <span class="login-brand-icon" aria-hidden="true">T</span>
+                <span class="login-brand-name">TurfMate</span>
+            </div>
             <p>Find Your Turf. Book Your Game.</p>
         </div>
 
@@ -234,14 +238,17 @@ function escape(string $value): string
             <!-- Password -->
             <label for="password">Password</label>
 
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                required
-            >
+            <div class="login-password-field">
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+                <button type="button" class="login-toggle-password" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
 
             <!-- Sign In -->
             <button type="submit" class="auth-btn">
@@ -265,5 +272,15 @@ function escape(string $value): string
 
 </div>
 
+<script>
+    const toggle = document.querySelector('.login-toggle-password');
+    const passwordField = document.getElementById('password');
+    toggle.addEventListener('click', () => {
+        const isVisible = passwordField.type === 'text';
+        passwordField.type = isVisible ? 'password' : 'text';
+        toggle.textContent = isVisible ? 'Show' : 'Hide';
+        toggle.setAttribute('aria-label', isVisible ? 'Show password' : 'Hide password');
+        toggle.setAttribute('aria-pressed', String(!isVisible));
+    });
+</script>
 </body>
-</html>
