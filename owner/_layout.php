@@ -12,6 +12,7 @@ function tm_page_header(string $pageTitle, string $active, array $owner): void
     $turfsClass = $active === 'turfs' ? 'active' : '';
     $bookingsClass = $active === 'bookings' ? 'active' : '';
     $reportsClass = $active === 'reports' ? 'active' : '';
+    $staffClass = $active === 'staff' ? 'active' : '';
 
     // Expenses and Inventory section
     $expensesClass = in_array($active, ['expenses', 'inventory', 'maintenance'], true)
@@ -67,6 +68,10 @@ function tm_page_header(string $pageTitle, string $active, array $owner): void
             <a class="nav-link <?= $bookingsClass ?>"
                href="bookings.php">
                 ▣ <span>Bookings</span>
+            </a>
+
+            <a class="nav-link <?= $staffClass ?>" href="staff.php">
+                ◉ <span>Staff Management</span>
             </a>
 
             <!-- EXPENSES & INVENTORY -->
