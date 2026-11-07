@@ -22,3 +22,7 @@
 # System files
 .DS_Stor.env
 
+*.bak.*
+*.backup
+customer-backup-2/
+customer-old/

@@ -1,0 +1,12 @@
+/* Staff manual booking */
+.staff-page { max-width: 1050px; margin: 30px auto; padding: 0 24px 50px; }
+.staff-page h1 { color: #195a3a; margin-bottom: 8px; }
+.staff-page > p { color: #64748b; margin-bottom: 22px; }
+.staff-manual-form { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 25px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.staff-manual-form label { display: grid; gap: 8px; font-weight: 650; color: #263445; }
+.staff-manual-form input,.staff-manual-form select,.staff-manual-form textarea { width: 100%; padding: 12px; border: 1px solid #d2d9df; border-radius: 9px; font: inherit; }
+.staff-manual-form .wide { grid-column: 1 / -1; }
+.staff-manual-form button { background: #216e48; color: white; border: 0; padding: 13px 20px; border-radius: 9px; font-weight: 700; cursor: pointer; }
+.staff-manual-form button:disabled { opacity: .5; cursor: not-allowed; }
+.staff-alert { background: #fff1f0; padding: 14px; color: #a42620; border-radius: 9px; margin: 15px 0; }
+@media(max-width:700px){.staff-manual-form{grid-template-columns:1fr;padding:16px}.staff-page{padding:0 14px}}
