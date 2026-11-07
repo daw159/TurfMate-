@@ -52,7 +52,7 @@ function staffLayoutStart(string $title, string $active): void
     $inventoryClass = $active === 'inventory' ? 'active' : '';
     $manualClass = $active === 'manual' ? 'active' : '';
     $maintenanceClass = $active === 'maintenance' ? 'active' : '';
-    echo <<<HTML
+     echo <<<HTML
     <!doctype html>
     <html lang="en">
     <head>
@@ -62,10 +62,16 @@ function staffLayoutStart(string $title, string $active): void
         <link rel="stylesheet" href="../assets/css/staff.css?v=1">
         <link rel="stylesheet" href="../assets/css/staff-extra.css?v=1">
         <link rel="stylesheet" href="../assets/css/staff-manual.css?v=1">
-        <link rel="stylesheet" href="../assets/css/staff-maintenance.css?v=2">    <body>
+        <link rel="stylesheet" href="../assets/css/staff-maintenance.css?v=6"> </head>   <body>
         <div class="app">
             <aside class="sidebar">
-                <a class="brand" href="dashboard.php">◈ TurfMate <span>STAFF</span></a>
+                <a class="brand" href="dashboard.php">
+                    <span class="brand-mark">T</span>
+                    <span class="brand-text">
+                        TurfMate
+                        <small>Staff workspace</small>
+                    </span>
+                </a>
                 <div class="nav-label">WORKSPACE</div>
                 <a class="nav-link {$dashboardClass}" href="dashboard.php">▦ Dashboard</a>
                 <a class="nav-link {$bookingClass}" href="bookings.php">▤ Bookings</a>
@@ -77,7 +83,7 @@ function staffLayoutStart(string $title, string $active): void
             </aside>
             <main class="main">
                 <header class="topbar"><span>Staff workspace</span><span class="badge">Assigned facilities only</span></header>
-    HTML;
+ HTML;
 }
 
 function staffLayoutEnd(): void
