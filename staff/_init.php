@@ -62,9 +62,7 @@ function staffLayoutStart(string $title, string $active): void
         <link rel="stylesheet" href="../assets/css/staff.css?v=1">
         <link rel="stylesheet" href="../assets/css/staff-extra.css?v=1">
         <link rel="stylesheet" href="../assets/css/staff-manual.css?v=1">
-        <link rel="stylesheet" href="../assets/css/staff-maintenance.css?v=1">
-    </head>
-    <body>
+        <link rel="stylesheet" href="../assets/css/staff-maintenance.css?v=2">    <body>
         <div class="app">
             <aside class="sidebar">
                 <a class="brand" href="dashboard.php">◈ TurfMate <span>STAFF</span></a>
