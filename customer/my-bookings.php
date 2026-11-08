@@ -54,7 +54,11 @@ bookingHead('My Bookings');
                         <td><?= esc($row['start_at']) ?></td>
                         <td><?= esc($row['end_at']) ?></td>
                         <td>Rs. <?= number_format((float) $row['total_amount'], 2) ?></td>
-                        <td><span class="status"><?= esc(ucfirst($row['status'])) ?></span></td>
+                        <td>
+    <span class="status status-<?= esc(strtolower($row['status'])) ?>">
+        <?= esc(ucfirst($row['status'])) ?>
+    </span>
+</td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -61,9 +61,25 @@ try {
         }
     }
 
-    $q = $pdo->prepare('UPDATE bookings SET status = ? WHERE id = ?');
-    $q->execute([$action, $id]);
+// Synchronize customer booking group status
+// 1. Update the actual booking status
+$q = $pdo->prepare("
+    UPDATE bookings
+    SET status = ?
+    WHERE id = ?
+");
+$q->execute([$action, (int) $id]);
 
+// 2. Synchronize the customer booking group status
+$syncGroup = $pdo->prepare("
+    UPDATE tm_booking_groups g
+    INNER JOIN tm_booking_group_items gi
+        ON gi.group_id = g.id
+    SET g.status = ?
+    WHERE gi.booking_id = ?
+");
+
+$syncGroup->execute([$action, (int) $id]);
     $pdo->commit();
     tm_flash('success', 'Booking #' . $id . ' updated to ' . $action . '.');
 } catch (Throwable $e) {

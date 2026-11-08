@@ -43,7 +43,7 @@ function tm_br_status(string $status): string
 // -----------------------------------------------------------------------------
 $facilityStmt = $pdo->prepare(
     'SELECT id, name FROM facilities
-     WHERE owner_id = ? AND deleted_at IS NULL ORDER BY name'
+     WHERE owner_id = ? ORDER BY name'
 );
 $facilityStmt->execute([$ownerId]);
 $facilities = $facilityStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +64,7 @@ $turfStmt = $pdo->prepare(
     'SELECT t.id, t.name, t.facility_id, f.name AS facility_name
      FROM turfs t
      JOIN facilities f ON f.id = t.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
      ORDER BY f.name, t.name'
 );
 $turfStmt->execute([$ownerId]);
@@ -200,7 +200,7 @@ FROM (
 INNER JOIN turfs t ON t.id = r.turf_id
 INNER JOIN facilities f ON f.id = t.facility_id
 WHERE f.owner_id = ?
-  AND f.deleted_at IS NULL
+ 
   AND r.booking_date BETWEEN ? AND ?
 SQL;
 

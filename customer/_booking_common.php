@@ -154,7 +154,7 @@ function bookingHead(string $title): void
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= esc($title) ?> | TurfMate</title>
         <link rel="stylesheet" href="../assets/css/booking.css?v=20261108-2">
-        <link rel="stylesheet" href="../assets/css/customer-layout.css?v=1">
+        <link rel="stylesheet" href="../assets/css/customer-layout.css?v=20261108-3">
     </head>
     <body class="customer-app">
     <?php

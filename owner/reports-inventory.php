@@ -110,7 +110,7 @@ function tm_im_line_chart(array $points, string $label, string $color, bool $mon
 // -----------------------------------------------------------------------------
 $facilityStmt = $pdo->prepare(
     'SELECT id, name FROM facilities
-     WHERE owner_id = ? AND deleted_at IS NULL ORDER BY name'
+     WHERE owner_id = ? ORDER BY name'
 );
 $facilityStmt->execute([$ownerId]);
 $facilities = $facilityStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -209,7 +209,7 @@ $inventoryStatsStmt = $pdo->prepare(
             COALESCE(SUM(CASE WHEN i.quantity = 0 THEN 1 ELSE 0 END), 0) AS out_of_stock
      FROM inventory_items i
      JOIN facilities f ON f.id = i.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND i.status = 'active' $facilityWhere"
 );
 $inventoryStatsStmt->execute($liveParams);
@@ -221,7 +221,7 @@ $categoryStmt = $pdo->prepare(
             COUNT(*) AS items
      FROM inventory_items i
      JOIN facilities f ON f.id = i.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND i.status = 'active' $facilityWhere
      GROUP BY COALESCE(NULLIF(TRIM(i.category), ''), 'Uncategorized')
      ORDER BY value DESC, category ASC"
@@ -262,7 +262,7 @@ $lowStockStmt = $pdo->prepare(
     "SELECT i.name, i.quantity, i.reorder_level, i.unit, f.name AS facility_name
      FROM inventory_items i
      JOIN facilities f ON f.id = i.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND i.status = 'active' AND i.quantity <= i.reorder_level $facilityWhere
      ORDER BY (i.reorder_level - i.quantity) DESC, i.quantity ASC
      LIMIT 8"
@@ -282,7 +282,7 @@ $stockStatsStmt = $pdo->prepare(
      FROM inventory_transactions x
      JOIN inventory_items i ON i.id = x.item_id
      JOIN facilities f ON f.id = i.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND x.created_at >= ? AND x.created_at < DATE_ADD(?, INTERVAL 1 DAY)
        $facilityWhere"
 );
@@ -295,7 +295,7 @@ $stockTrendStmt = $pdo->prepare(
      FROM inventory_transactions x
      JOIN inventory_items i ON i.id = x.item_id
      JOIN facilities f ON f.id = i.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND x.created_at >= ? AND x.created_at < DATE_ADD(?, INTERVAL 1 DAY)
        $facilityWhere
      GROUP BY bucket ORDER BY bucket"
@@ -313,7 +313,7 @@ $usageStmt = $pdo->prepare(
      FROM inventory_transactions x
      JOIN inventory_items i ON i.id = x.item_id
      JOIN facilities f ON f.id = i.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND x.transaction_type = 'usage' AND x.quantity_change < 0
        AND x.created_at >= ? AND x.created_at < DATE_ADD(?, INTERVAL 1 DAY)
        $facilityWhere
@@ -336,7 +336,7 @@ $maintenanceStatsStmt = $pdo->prepare(
      FROM maintenance_records m
      JOIN turfs t ON t.id = m.turf_id
      JOIN facilities f ON f.id = t.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND m.start_date BETWEEN ? AND ? $facilityWhere"
 );
 $maintenanceStatsStmt->execute($rangeParams);
@@ -348,7 +348,7 @@ $maintenanceTrendStmt = $pdo->prepare(
      FROM maintenance_records m
      JOIN turfs t ON t.id = m.turf_id
      JOIN facilities f ON f.id = t.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND m.start_date BETWEEN ? AND ? $facilityWhere
      GROUP BY bucket ORDER BY bucket"
 );
@@ -364,7 +364,7 @@ $maintenanceByTurfStmt = $pdo->prepare(
      FROM maintenance_records m
      JOIN turfs t ON t.id = m.turf_id
      JOIN facilities f ON f.id = t.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND m.start_date BETWEEN ? AND ? $facilityWhere
      GROUP BY t.id, t.name, f.name
      ORDER BY recorded_cost DESC, jobs DESC LIMIT 8"
@@ -382,7 +382,7 @@ $maintenanceHistoryStmt = $pdo->prepare(
      FROM maintenance_records m
      JOIN turfs t ON t.id = m.turf_id
      JOIN facilities f ON f.id = t.facility_id
-     WHERE f.owner_id = ? AND f.deleted_at IS NULL
+     WHERE f.owner_id = ?
        AND m.start_date BETWEEN ? AND ? $facilityWhere
      ORDER BY m.start_date DESC, m.id DESC LIMIT 12"
 );

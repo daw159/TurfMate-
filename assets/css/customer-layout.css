@@ -172,3 +172,33 @@ body.customer-app > main {
     .customer-hero { padding: 55px 20px; }
     .customer-dashboard-content { padding: 32px 14px 45px; }
 }
+
+
+/* =====================================
+   CUSTOMER BOOKING STATUS COLORS
+===================================== */
+
+.status.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.status-confirmed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status.status-completed {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status.status-cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.status.status-rejected {
+    background: #ffe4e6;
+    color: #be123c;
+}

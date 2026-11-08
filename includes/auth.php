@@ -28,7 +28,7 @@ function requireRole(array $allowedRoles): void
         $_SESSION = [];
         session_destroy();
 
-        header('Location: turfmate/auth/login.php');
+        header('Location: /turfmate/auth/login.php');
         exit;
     }
 
@@ -49,7 +49,7 @@ function requireRole(array $allowedRoles): void
             $_SESSION = [];
             session_destroy();
 
-            header('Location: turfmate/auth/login.php');
+            header('Location: /turfmate/auth/login.php');
             exit;
         }
 

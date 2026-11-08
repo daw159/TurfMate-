@@ -32,3 +32,14 @@ customer-old/
 
 # System files
 .DS_Store
+# Automated testing files
+/tests/
+
+# Python cache
+__pycache__/
+
+# Nano temporary files
+*~
+
+# Generated test reports
+tests/full/results-*.txt
