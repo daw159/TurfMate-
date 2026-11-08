@@ -1,6 +1,7 @@
 <div align="center">
 
 <!-- Animated header images are rendered by third-party SVG services; the README still works if they are unavailable. -->
+
 <img
   src="https://capsule-render.vercel.app/api?type=waving&amp;height=210&amp;color=0:0F5132,50:198754,100:65C18C&amp;text=TurfMate&amp;fontSize=65&amp;fontColor=ffffff&amp;animation=fadeIn&amp;section=header"
   alt="TurfMate"
@@ -26,13 +27,13 @@
 
 **A full-stack Web Technologies project** connecting turf discovery, reservations, facility operations, and platform administration in one LAMP-based application.
 
-[Overview](#-overview) Â· [Features](#-features-by-role) Â· [Demo flow](#-end-to-end-demo-walkthrough) Â· [Database](#-database-design) Â· [Installation](#-quick-start) Â· [Security](#-security-and-data-privacy)
+[Overview](#-overview) · [Features](#-features-by-role) · [Demo flow](#-end-to-end-demo-walkthrough) · [Database](#-database-design) · [Installation](#-quick-start) · [Security](#-security-and-data-privacy)
 
 </div>
 
 ---
 
-## ðŸŒŸ Overview
+## 🌟 Overview
 
 **TurfMate** is a role-based online turf booking and sports facility management system built with **PHP, MySQL, Apache, HTML, CSS, and JavaScript**. Instead of managing bookings through calls, scattered messages, or handwritten records, it brings customers and venue teams into one connected system.
 
@@ -59,10 +60,10 @@
 
 ---
 
-## ðŸ§­ Explore the Project
+## 🧭 Explore the Project
 
 <details open>
-<summary><strong>ðŸ“š Jump to a section</strong></summary>
+<summary><strong>📚 Jump to a section</strong></summary>
 
 - [Features by role](#-features-by-role)
 - [How TurfMate works](#-how-turfmate-works)
@@ -80,14 +81,14 @@
 
 </details>
 
-## âœ¨ Features by Role
+## ✨ Features by Role
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### ðŸ‘¤ Customer Portal
-**Discover â€¢ Reserve â€¢ Track**
+### 👤 Customer Portal
+**Discover • Reserve • Track**
 
 - Customer registration, login, and profile
 - Browse sports facilities and turfs
@@ -97,13 +98,13 @@
 - Overnight online reservations via booking groups
 - Booking history and status tracking
 
-**Booking states:** `pending` â†’ `confirmed` â†’ `completed`, with rejection/cancellation when applicable.
+**Booking states:** `pending` → `confirmed` → `completed`, with rejection/cancellation when applicable.
 
 </td>
 <td width="50%" valign="top">
 
-### ðŸŸï¸ Owner Portal
-**Manage â€¢ Analyze â€¢ Grow**
+### 🏟️ Owner Portal
+**Manage • Analyze • Grow**
 
 - Overview dashboard and booking metrics
 - Facility and turf management
@@ -121,8 +122,8 @@
 <tr>
 <td width="50%" valign="top">
 
-### ðŸ‘· Staff Portal
-**Operate â€¢ Assist â€¢ Update**
+### 👷 Staff Portal
+**Operate • Assist • Update**
 
 - Dashboard for assigned venues
 - Booking lists and authorized status updates
@@ -137,8 +138,8 @@
 </td>
 <td width="50%" valign="top">
 
-### ðŸ›¡ï¸ Super Admin Portal
-**Review â€¢ Approve â€¢ Oversee**
+### 🛡️ Super Admin Portal
+**Review • Approve • Oversee**
 
 - Platform-level dashboard
 - Owner and user administration
@@ -153,26 +154,26 @@
 </tr>
 </table>
 
-### ðŸ” Access and responsibility matrix
+### 🔐 Access and responsibility matrix
 
 | Capability | Customer | Owner | Staff | Super Admin |
 |---|:---:|:---:|:---:|:---:|
-| Browse available turfs | âœ… | â€” | Assigned | Oversight |
-| Create online reservations | âœ… | â€” | â€” | â€” |
-| Manage booking requests | Own history | Own facilities | Assigned active facilities | â€” |
-| Make manual bookings | â€” | âœ… | âœ… | â€” |
-| Create/edit facilities and turfs | â€” | âœ… | Limited/read-only | Approval |
-| Configure pricing | â€” | âœ… | Read-only | â€” |
-| Manage staff assignments | â€” | âœ… | â€” | â€” |
-| Inventory and maintenance | â€” | âœ… | Assigned facilities | â€” |
-| Financial and operational reports | â€” | âœ… | â€” | Platform reports |
-| Approve facilities / administer users | â€” | â€” | â€” | âœ… |
+| Browse available turfs | ✅ | — | Assigned | Oversight |
+| Create online reservations | ✅ | — | — | — |
+| Manage booking requests | Own history | Own facilities | Assigned active facilities | — |
+| Make manual bookings | — | ✅ | ✅ | — |
+| Create/edit facilities and turfs | — | ✅ | Limited/read-only | Approval |
+| Configure pricing | — | ✅ | Read-only | — |
+| Manage staff assignments | — | ✅ | — | — |
+| Inventory and maintenance | — | ✅ | Assigned facilities | — |
+| Financial and operational reports | — | ✅ | — | Platform reports |
+| Approve facilities / administer users | — | — | — | ✅ |
 
 *Access is enforced server-side, not just by hiding navigation links.*
 
 ---
 
-## ðŸ”„ How TurfMate Works
+## 🔄 How TurfMate Works
 
 ### 1. The complete booking lifecycle
 
@@ -240,7 +241,7 @@ flowchart TD
 
 ---
 
-## ðŸŽ¬ End-to-End Demo Walkthrough
+## 🎬 End-to-End Demo Walkthrough
 
 A suggested sequence for a university demonstration or narrated video:
 
@@ -258,7 +259,7 @@ A suggested sequence for a university demonstration or narrated video:
 > [!TIP]
 > For the clearest demo, use separate demo accounts for each role, perform a **fresh booking**, and show its status moving between the different portals. Avoid showing passwords, personal phone numbers, or database credentials in recordings.
 
-## ðŸ“¸ Screenshots and Video
+## 📸 Screenshots and Video
 
 Screenshots and a demonstration video can be added without changing application code.
 
@@ -269,22 +270,22 @@ Screenshots and a demonstration video can be added without changing application 
 ![Staff dashboard](docs/screenshots/staff-dashboard.png)
 ![Super Admin dashboard](docs/screenshots/super-admin-dashboard.png)
 
-[â–¶ Watch the TurfMate walkthrough](https://YOUR_DEMO_VIDEO_URL)
+[▶ Watch the TurfMate walkthrough](https://YOUR_DEMO_VIDEO_URL)
 -->
 
 | Showcase | What to capture |
 |---|---|
-| ðŸ  Home | Landing page and sports discovery |
-| ðŸ Customer | Turf availability, quotation, and booking history |
-| ðŸ“Š Owner | Dashboard, staff management, inventory, finance, and reports |
-| ðŸ› ï¸ Staff | Assigned-facility bookings and daily operations |
-| ðŸ›¡ï¸ Super Admin | Facility approval and platform overview |
+| 🏠 Home | Landing page and sports discovery |
+| 🏏 Customer | Turf availability, quotation, and booking history |
+| 📊 Owner | Dashboard, staff management, inventory, finance, and reports |
+| 🛠️ Staff | Assigned-facility bookings and daily operations |
+| 🛡️ Super Admin | Facility approval and platform overview |
 
 **Suggested location for image files:** `docs/screenshots/`. Once added, uncomment the Markdown images above and replace the demo-video placeholder with your actual link. No screenshots or video links have been invented here.
 
 ---
 
-## ðŸ§° Technology Stack
+## 🧰 Technology Stack
 
 <div align="center">
 
@@ -301,7 +302,7 @@ Screenshots and a demonstration video can be added without changing application 
 
 </div>
 
-## ðŸ—ï¸ System Architecture
+## 🏗️ System Architecture
 
 ```mermaid
 flowchart TB
@@ -322,79 +323,79 @@ flowchart TB
 
 ---
 
-## ðŸ—‚ï¸ Project Folder Structure
+## 🗂️ Project Folder Structure
 
 <details open>
-<summary><strong>ðŸ“ Expand the main source tree</strong></summary>
+<summary><strong>📁 Expand the main source tree</strong></summary>
 
 ```text
 TurfMate/
-â”œâ”€â”€ index.php                   # Public entry / homepage
-â”œâ”€â”€ auth/                       # Login, registration, logout
-â”‚   â”œâ”€â”€ login.php
-â”‚   â”œâ”€â”€ register.php
-â”‚   â””â”€â”€ logout.php
-â”œâ”€â”€ customer/                   # Customer browsing and booking
-â”‚   â”œâ”€â”€ dashboard.php
-â”‚   â”œâ”€â”€ turfs.php
-â”‚   â”œâ”€â”€ turf-details.php
-â”‚   â”œâ”€â”€ turf-availability.php
-â”‚   â”œâ”€â”€ booking_engine.php
-â”‚   â”œâ”€â”€ booking-quote.php
-â”‚   â”œâ”€â”€ my-bookings.php
-â”‚   â””â”€â”€ profile.php
-â”œâ”€â”€ owner/                      # Venue/business administration
-â”‚   â”œâ”€â”€ dashboard.php
-â”‚   â”œâ”€â”€ facilities.php
-â”‚   â”œâ”€â”€ turfs.php
-â”‚   â”œâ”€â”€ pricing_rules.php
-â”‚   â”œâ”€â”€ bookings.php
-â”‚   â”œâ”€â”€ booking-actions.php
-â”‚   â”œâ”€â”€ manual-booking.php
-â”‚   â”œâ”€â”€ staff.php
-â”‚   â”œâ”€â”€ inventory.php
-â”‚   â”œâ”€â”€ inventory-transactions.php
-â”‚   â”œâ”€â”€ maintenance.php
-â”‚   â”œâ”€â”€ expenses.php
-â”‚   â”œâ”€â”€ reports.php
-â”‚   â”œâ”€â”€ reports-bookings.php
-â”‚   â”œâ”€â”€ reports-inventory.php
-â”‚   â”œâ”€â”€ reports-financial.php
-â”‚   â””â”€â”€ reports-export.php
-â”œâ”€â”€ staff/                      # Assigned facility operations
-â”‚   â”œâ”€â”€ dashboard.php
-â”‚   â”œâ”€â”€ bookings.php
-â”‚   â”œâ”€â”€ manual-booking.php
-â”‚   â”œâ”€â”€ facilities.php
-â”‚   â”œâ”€â”€ inventory.php
-â”‚   â””â”€â”€ maintenance.php
-â”œâ”€â”€ super-admin/                # Platform-level administration
-â”‚   â”œâ”€â”€ dashboard.php
-â”‚   â”œâ”€â”€ facilities.php
-â”‚   â”œâ”€â”€ owners.php
-â”‚   â”œâ”€â”€ users.php
-â”‚   â””â”€â”€ reports.php
-â”œâ”€â”€ includes/                   # Auth and shared functions
-â”‚   â”œâ”€â”€ auth.php
-â”‚   â”œâ”€â”€ db.php
-â”‚   â””â”€â”€ functions.php
-â”œâ”€â”€ config/
-â”‚   â””â”€â”€ database.php            # Loads local .env and creates PDO
-â”œâ”€â”€ database/
-â”‚   â”œâ”€â”€ schema.sql              # Database schema source
-â”‚   â””â”€â”€ migrations/             # Incremental SQL migrations
-â”œâ”€â”€ assets/
-â”‚   â”œâ”€â”€ css/                    # Page / module styling
-â”‚   â”œâ”€â”€ images/                 # Sports and site imagery
-â”‚   â””â”€â”€ js/                     # Front-end scripts
-â”œâ”€â”€ README.md
-â””â”€â”€ .gitignore
+├── index.php                   # Public entry / homepage
+├── auth/                       # Login, registration, logout
+│   ├── login.php
+│   ├── register.php
+│   └── logout.php
+├── customer/                   # Customer browsing and booking
+│   ├── dashboard.php
+│   ├── turfs.php
+│   ├── turf-details.php
+│   ├── turf-availability.php
+│   ├── booking_engine.php
+│   ├── booking-quote.php
+│   ├── my-bookings.php
+│   └── profile.php
+├── owner/                      # Venue/business administration
+│   ├── dashboard.php
+│   ├── facilities.php
+│   ├── turfs.php
+│   ├── pricing_rules.php
+│   ├── bookings.php
+│   ├── booking-actions.php
+│   ├── manual-booking.php
+│   ├── staff.php
+│   ├── inventory.php
+│   ├── inventory-transactions.php
+│   ├── maintenance.php
+│   ├── expenses.php
+│   ├── reports.php
+│   ├── reports-bookings.php
+│   ├── reports-inventory.php
+│   ├── reports-financial.php
+│   └── reports-export.php
+├── staff/                      # Assigned facility operations
+│   ├── dashboard.php
+│   ├── bookings.php
+│   ├── manual-booking.php
+│   ├── facilities.php
+│   ├── inventory.php
+│   └── maintenance.php
+├── super-admin/                # Platform-level administration
+│   ├── dashboard.php
+│   ├── facilities.php
+│   ├── owners.php
+│   ├── users.php
+│   └── reports.php
+├── includes/                   # Auth and shared functions
+│   ├── auth.php
+│   ├── db.php
+│   └── functions.php
+├── config/
+│   └── database.php            # Loads local .env and creates PDO
+├── database/
+│   ├── schema.sql              # Database schema source
+│   └── migrations/             # Incremental SQL migrations
+├── assets/
+│   ├── css/                    # Page / module styling
+│   ├── images/                 # Sports and site imagery
+│   └── js/                     # Front-end scripts
+├── README.md
+└── .gitignore
 ```
 
 </details>
 
 <details>
-<summary><strong>ðŸ§© What the most important files do</strong></summary>
+<summary><strong>🧩 What the most important files do</strong></summary>
 
 | File | Responsibility |
 |---|---|
@@ -412,7 +413,7 @@ TurfMate/
 
 ---
 
-## ðŸ—„ï¸ Database Design
+## 🗄️ Database Design
 
 TurfMate uses a relational schema that connects users, venues, reservations, payment records, operations, and reporting.
 
@@ -458,7 +459,7 @@ erDiagram
 
 ---
 
-## ðŸš€ Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -526,7 +527,7 @@ Direct login URL: **`http://localhost/turfmate/auth/login.php`**
 Public registration supports Customer and Owner accounts. Staff access is provisioned by an Owner; Super Admin access should be provisioned privately.
 
 <details>
-<summary><strong>ðŸ› ï¸ Troubleshooting installation</strong></summary>
+<summary><strong>🛠️ Troubleshooting installation</strong></summary>
 
 ```bash
 # Verify services
@@ -549,7 +550,7 @@ If login redirects fail, verify the app directory is `/turfmate`, database conne
 
 ---
 
-## ðŸ”’ Security and Data Privacy
+## 🔒 Security and Data Privacy
 
 **Existing design foundations:**
 
@@ -576,7 +577,7 @@ If login redirects fail, verify the app directory is `/turfmate`, database conne
 
 ---
 
-## ðŸ§ª Testing and Verification
+## 🧪 Testing and Verification
 
 Testing should cover both page access **and** the data changing correctly across roles.
 
@@ -586,7 +587,7 @@ Testing should cover both page access **and** the data changing correctly across
 | Facility approval | Unapproved venues excluded from customer discovery |
 | Staff isolation | Employee only accesses assigned eligible facilities |
 | Booking conflicts | Overlapping confirmed slots cannot be booked |
-| Booking lifecycle | Pending â†’ Confirmed â†’ Completed correctly reflected across portals |
+| Booking lifecycle | Pending → Confirmed → Completed correctly reflected across portals |
 | Cancellation/rejection | Correct allowed transitions and status visibility |
 | Overnight bookings | Multi-day booking segments remain consistent |
 | Inventory | Purchases, usage, adjustments and stock validation |
@@ -599,7 +600,7 @@ If you retain the local automated test tools, their usage may be documented in `
 
 ---
 
-## ðŸ¤ Git Collaboration
+## 🤝 Git Collaboration
 
 This is a shared source-code repository. **Git synchronizes files, not MySQL records.** Each teammate keeps their own database configuration and must import/apply database changes separately.
 
@@ -627,7 +628,7 @@ git push origin main
 
 ---
 
-## ðŸ›£ï¸ Roadmap
+## 🛣️ Roadmap
 
 Potential future enhancements (**not claimed as implemented**):
 
@@ -639,11 +640,11 @@ Potential future enhancements (**not claimed as implemented**):
 - [ ] Production deployment, HTTPS, monitoring and scheduled backups
 - [ ] Additional accessibility and mobile UX improvements
 
-## ðŸŽ“ Academic Project
+## 🎓 Academic Project
 
 | | |
 |---|---|
-| **Project** | TurfMate â€” Online Turf Booking & Sports Facility Management System |
+| **Project** | TurfMate — Online Turf Booking & Sports Facility Management System |
 | **Course context** | Web Technologies |
 | **Approach** | LAMP stack, role-based access, relational database |
 | **Development environment** | Ubuntu Linux (including VirtualBox-based local development) |
@@ -654,7 +655,7 @@ Potential future enhancements (**not claimed as implemented**):
 
 <div align="center">
 
-### ðŸ TurfMate
+### 🏏 TurfMate
 
 **Less paperwork. Smarter bookings. Better turf management.**
 
