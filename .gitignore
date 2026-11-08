@@ -19,10 +19,16 @@
 *.log
 *.tmp
 
-# System files
-.DS_Stor.env
-
+# Backup files
+*.bak
 *.bak.*
 *.backup
+*.backup.*
+*.old
+
+# Old project folders
 customer-backup-2/
 customer-old/
+
+# System files
+.DS_Store
