@@ -8,8 +8,6 @@
 ![Apache](https://img.shields.io/badge/Server-Apache-D22128?logo=apache&logoColor=white)
 ![License](https://img.shields.io/badge/License-Not%20specified-lightgrey)
 
-> **Project status:** Core application modules have been implemented for the Web Technologies project and are undergoing integration and acceptance testing. The repository's current code is the source of truth; screenshots, sample records and individual installations may differ.
-
 ## Contents
 
 1. [Overview](#overview)
